@@ -1,99 +1,57 @@
 # Game Companion
 
-Game Companion is a desktop utility for turning live game data into portable, structured game-state packages that can be used by an AI companion without depending on prior conversation memory.
+Game Companion is a desktop application for exporting game state into a portable JSON package that can be shared with an AI companion.
 
-The project began as a Diablo II: Resurrected prototype, but its architecture is intended to support additional games through game-specific exporters and a shared desktop application.
+The project started with Diablo II: Resurrected and is being built so additional games can be supported through their own exporters.
 
-> **Core idea:** the run should live in the artifact, not in the AI's memory.
+The main goal is simple: keep the important state of a run in a file instead of relying on one conversation or one AI model to remember everything.
 
 ## What it does
 
-Game Companion sits between a game and an AI assistant.
+Game Companion reads data from a supported game, converts it into a cleaner state model, and builds a `game-state.json` file around it.
 
-```text
-Game save / game data
-        |
-        v
-Game-specific exporter
-        |
-        v
-Normalized semantic state
-        |
-        v
-Game Companion package builder
-        |
-        v
-game-state.json
-        |
-        v
-AI companion
-```
+For Diablo II, that currently means reading the character and stash saves, resolving useful game data, and exporting things such as:
 
-Instead of handing an AI raw save data, Game Companion translates game-specific structures into human- and machine-readable state such as character attributes, skills, equipment, quests, resources, companions, inventory, and other information relevant to the current run.
+- Character level, class, attributes, and skills
+- Equipment, inventory, and stash items
+- Mercenary information
+- Quest progress
+- Selected run resources
+- Item names, stats, sockets, sets, uniques, and runewords
 
-The long-term goal is a self-contained snapshot that can preserve the quality and continuity of an AI-assisted playthrough even when changing models, services, conversations, or devices.
+The desktop app handles file selection, runs the exporter, shows basic status information, and saves the final package.
 
-## Current prototype: Diablo II: Resurrected
+As the project develops, the same package will also include the rules, instructions, mechanics, history, and other information needed to continue an AI-assisted run without depending on previous chat context.
 
-The first supported game is **Diablo II: Resurrected**, using a modded character as the project's primary development case.
+## Current support
 
-The Diablo II pipeline currently supports:
+### Diablo II: Resurrected
 
-- Character save (`.d2s`) parsing
-- Shared stash (`.d2i`) parsing
-- Character attributes and unspent points
-- Learned skills
-- Equipped items, inventory, and personal stash
-- Mercenary identity, level, attributes, skills, and equipment
-- Shared stash tabs
-- Quest state across difficulties and acts
-- Selected controlled resources
-- Chronicle data derived from the stash
-- Item names, base types, sockets, runewords, sets, uniques, and formatted item stats
-- Generated lookup data sourced from Diablo II data tables
+The Diablo II exporter is the first working implementation and is currently the main development target.
 
-The desktop application can select save sources, persist their paths, invoke the exporter, preview the detected character, assemble the package, and write the resulting `game-state.json`.
+It uses:
 
-## Architecture
+- C# / .NET for save parsing and formatting
+- D2SSharp for reading Diablo II save structures
+- Python for generating supporting lookup data
+- React + TypeScript for the desktop UI
+- Tauri for native desktop access
 
-Game Companion intentionally uses different technologies at different boundaries instead of forcing the entire pipeline into one language.
+See [`exporters/diablo-2/README.md`](exporters/diablo-2/README.md) for exporter details.
 
-```text
-React + TypeScript
-    UI and package orchestration
-
-Tauri + Rust
-    Desktop application boundary and native capabilities
-
-C# / .NET
-    Game-specific save parsing and semantic transformation
-
-Python
-    Generation and validation of supporting lookup data
-```
-
-### Repository layout
+## Repository layout
 
 ```text
 game-companion/
-├─ app/
-│  ├─ src/                 # React + TypeScript UI
-│  └─ src-tauri/           # Tauri desktop host
-│
+├─ app/                    # React + Tauri desktop application
 └─ exporters/
-   └─ diablo-2/
-      ├─ Export/           # JSON export behavior
-      ├─ Formatting/       # Raw-save -> semantic-state translation
-      ├─ Lookups/          # Generated game-data lookup access
-      ├─ Models/           # Exported state models
-      ├─ Parsing/          # Save loading
-      └─ generators/       # Python lookup-data builders
+   └─ diablo-2/            # Diablo II save exporter and data generators
 ```
 
-More detailed documentation lives alongside each major part of the project:
+Additional documentation:
 
-- [`app/README.md`](app/README.md) - desktop application, React UI, and Tauri integration
-- [`exporters/diablo-2/README.md`](exporters/diablo-2/README.md) - Diablo II exporter, data generation, and command-line usage
+- [`app/README.md`](app/README.md)
+- [`exporters/diablo-2/README.md`](exporters/diablo-2/README.md)
 
 ## Design principles
 
