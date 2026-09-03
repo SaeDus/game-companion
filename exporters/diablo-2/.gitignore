@@ -1,0 +1,70 @@
+# ------------------------------
+# C# / .NET
+# ------------------------------
+
+bin/
+obj/
+
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio build / cache output
+.vs/
+TestResults/
+
+# NuGet-generated local artifacts
+packages/
+*.nupkg
+*.snupkg
+
+# Published / packaged sidecar output
+publish/
+
+# ------------------------------
+# Python
+# ------------------------------
+
+__pycache__/
+**/__pycache__/
+
+*.py[cod]
+*$py.class
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+.venv/
+venv/
+env/
+ENV/
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# ------------------------------
+# Diablo II exporter runtime data
+# ------------------------------
+
+# Generated lookup databases. Runtime data now lives outside the repo,
+# but keep this ignored in case a local Data directory is recreated.
+Data/
+
+# Local test / scratch output
+test/
+tests/output/
+tmp/
+temp/
+
+# Generated game-state / export artifacts
+game-state.json
+character-state.json
+*.tmp.json

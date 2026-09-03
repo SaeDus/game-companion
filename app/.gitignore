@@ -1,0 +1,30 @@
+# React / Node
+node_modules/
+dist/
+dist-ssr/
+.vite/
+.cache/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Tauri / Rust build output
+src-tauri/target/
+
+# Tauri-generated schemas / local generated artifacts
+src-tauri/gen/
+
+# Rust backup files
+**/*.rs.bk
+
+# Test / coverage output
+coverage/
+.nyc_output/
+
+# Package-manager debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

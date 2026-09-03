@@ -1,0 +1,20 @@
+# Repository-wide ignores
+# Keep this file generic. App- and exporter-specific ignores belong
+# in their respective subdirectories.
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor / IDE workspace files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Generic temporary / log files
+*.tmp
+*.temp
+*.log

@@ -1,0 +1,100 @@
+.equipment-layout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  grid-template-areas:
+    ". head neck"
+    "rightarm torso leftarm"
+    "gloves belt feet"
+    "leftring . rightring";
+  gap: 1rem;
+  align-items: start;
+}
+
+.mercenary-equipment-layout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  grid-template-areas:
+    ". head ."
+    "rightarm torso leftarm";
+  gap: 1rem;
+  align-items: start;
+}
+
+.slot-Head { grid-area: head; }
+.slot-Neck { grid-area: neck; }
+.slot-Torso { grid-area: torso; }
+.slot-RightArm { grid-area: rightarm; }
+.slot-LeftArm { grid-area: leftarm; }
+.slot-Gloves { grid-area: gloves; }
+.slot-Belt { grid-area: belt; }
+.slot-Feet { grid-area: feet; }
+.slot-LeftRing { grid-area: leftring; }
+.slot-RightRing { grid-area: rightring; }
+
+.equipment-slot {
+  min-width: 0;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.equipment-slot-label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.equipment-slot-empty {
+  border: 1px dashed #555;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  opacity: 0.5;
+}
+
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.inventory-grid article {
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.inventory-grid h3 {
+  margin-top: 0;
+}
+
+.quest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 180px);
+  gap: 1rem;
+}
+
+.quest-card {
+  aspect-ratio: 1 / 1;
+  border: 1px solid #555;
+  border-radius: 8px;
+  padding: 0.75rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  text-align: center;
+}
+
+.quest-name {
+  font-weight: 600;
+}
+
+.quest-state {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.65;
+}
