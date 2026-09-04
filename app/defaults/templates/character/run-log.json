@@ -1,0 +1,13 @@
+{
+  "SchemaVersion": 1,
+  "Id": "run-log",
+  "Title": "Run Log",
+  "Subtitle": "Farming Runs & Loot Results",
+  "Sections": [
+    {
+      "Id": "farming-results",
+      "Title": "Farming Results",
+      "Entries": []
+    }
+  ]
+}

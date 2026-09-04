@@ -1,0 +1,13 @@
+{
+  "SchemaVersion": 1,
+  "Id": "mechanics",
+  "Title": "Mechanics",
+  "Subtitle": "Verified Systems, Scaling & Acquisition",
+  "Sections": [
+    {
+      "Id": "game-mechanics",
+      "Title": "Game Mechanics",
+      "Entries": []
+    }
+  ]
+}

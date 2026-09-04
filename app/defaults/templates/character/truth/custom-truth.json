@@ -1,0 +1,13 @@
+{
+  "SchemaVersion": 1,
+  "Id": "custom-truth",
+  "Title": "Custom",
+  "Subtitle": "Run-Scoped & Temporary Overrides",
+  "Sections": [
+    {
+      "Id": "active-rules",
+      "Title": "Active Rules",
+      "Rules": []
+    }
+  ]
+}
