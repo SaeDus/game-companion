@@ -1,0 +1,109 @@
+{
+  "SchemaVersion": 1,
+  "Id": "game-instructions",
+  "Title": "Game Instructions",
+  "Subtitle": "Diablo II: Resurrected Player Execution Rules",
+  "Sections": [
+    {
+      "Id": "runewords-and-crafting",
+      "Title": "Runewords & Crafting",
+      "Rules": [
+        {
+          "Id": "runeword-socketing",
+          "Title": "Runeword Socketing",
+          "Content": [
+            "Only socket runes for a runeword after an explicit run decision has verified the exact recipe, rune order, socket count, valid base type, and current Offline availability."
+          ]
+        },
+        {
+          "Id": "rune-preservation",
+          "Title": "Rune Preservation",
+          "Content": [
+            "Do not sell any rune unless an explicit run decision releases it."
+          ]
+        },
+        {
+          "Id": "crafting-material-control",
+          "Title": "Crafting Material Control",
+          "Content": [
+            "Do not transmute, craft, upgrade, socket, or otherwise consume runes, gems, jewels, bases, or other crafting materials unless explicitly directed. Hoarded crafting materials are strategic resources, not free-use supplies."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "character-development",
+      "Title": "Character Development",
+      "Rules": [
+        {
+          "Id": "unallocated-points",
+          "Title": "Unallocated Points",
+          "Content": [
+            "Do not spend any unallocated skill or stat points, including quest-granted skill points, until the active character's allocation has been explicitly decided."
+          ]
+        },
+        {
+          "Id": "permanent-allocation-verification",
+          "Title": "Permanent Allocation Verification",
+          "Content": [
+            "Before carrying out any permanent skill or attribute allocation, verify the current authoritative state using both hard/base investment and every relevant soft bonus from equipped gear, charms, quest effects, or other tracked sources. For skills, distinguish hard points from effective skill level and verify the actual resulting breakpoint or benefit. For attribute requirements, determine how much Strength, Dexterity, or other required stat is already supplied by soft bonuses and invest only the hard points actually needed while the intended supporting gear is equipped. Because these allocations are irreversible without consuming a respec, precision and option preservation take priority over convenient round-number targets or incomplete reads of the current loadout."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "tactical-execution-and-logistics",
+      "Title": "Tactical Execution & Logistics",
+      "Rules": [
+        {
+          "Id": "tactical-autonomy",
+          "Title": "Tactical Autonomy",
+          "Content": [
+            "Use tactical autonomy while executing the run. Follow the Current Task and Strategy, but adapt moment to moment as needed to survive and carry out their intent: drink potions, dodge, reposition, kite, retreat from immediate danger, use a Town Portal defensively, and change exact movement or cast timing when the live encounter demands it. Do not force a written sequence when doing so would obviously endanger the active character."
+          ]
+        },
+        {
+          "Id": "routine-maintenance",
+          "Title": "Routine Maintenance",
+          "Content": [
+            "Routine maintenance and logistics do not require separate permission unless a task says otherwise: identify items, buy ordinary potions, scrolls, or keys, refill tomes, repair equipment, rearrange inventory or temporary stash space, recover the corpse after normal continuation is authorized, and revive the active mercenary. These actions do not authorize strategic spending of runes, quest rewards, respecs, sockets, gear disposal, permanent stat or skill allocation, or other controlled resources."
+          ]
+        },
+        {
+          "Id": "natural-exploration",
+          "Title": "Natural Exploration",
+          "Content": [
+            "Explore naturally encountered side dungeons by default unless the active Current Task or Strategy explicitly directs a narrow route or says to ignore side content. Skip deliberate farming or major backtracking unless specifically directed."
+          ]
+        },
+        {
+          "Id": "mercenary-continuity",
+          "Title": "Mercenary Continuity",
+          "Content": [
+            "Treat the active mercenary as part of the character's standing configuration. Do not replace the mercenary unless an explicit run decision directs it."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "controlled-resources-and-state",
+      "Title": "Controlled Resources & State",
+      "Rules": [
+        {
+          "Id": "quest-rewards-and-one-time-services",
+          "Title": "Quest Rewards & One-Time Services",
+          "Content": [
+            "Quest rewards and one-time services, including respecs, imbues, socket rewards, and comparable consumable rewards, are strategic resources. Do not spend them merely because they are available; preserve them until an explicit use is chosen."
+          ]
+        },
+        {
+          "Id": "tracked-state-refresh",
+          "Title": "Tracked-State Refresh",
+          "Content": [
+            "When an executed action changes tracked in-game state, save and refresh Game Companion as needed so fresh adapter state and the next game-companion.json can capture the result. Never manually edit generated adapter state to simulate an in-game change."
+          ]
+        }
+      ]
+    }
+  ]
+}

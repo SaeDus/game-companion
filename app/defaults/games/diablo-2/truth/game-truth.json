@@ -1,0 +1,292 @@
+{
+  "SchemaVersion": 1,
+  "Id": "game-truth",
+  "Title": "Game Truth",
+  "Subtitle": "Diablo II: Resurrected AI Rules",
+  "Sections": [
+    {
+      "Id": "game-identity-and-factual-baseline",
+      "Title": "Game Identity & Factual Baseline",
+      "Rules": [
+        {
+          "Id": "game-identity",
+          "Title": "Game Identity",
+          "Content": [
+            "This game profile targets an official, unmodified Diablo II: Resurrected - Reign of the Warlock Offline character. Use current official item, rune, socket, recipe, mercenary, quest, difficulty, and runeword rules unless the selected game profile explicitly defines a different supported ruleset. Character identity and character-specific behavior belong to the selected character files rather than Game Truth."
+          ]
+        },
+        {
+          "Id": "mechanics-scope",
+          "Title": "Mechanics Scope",
+          "Content": [
+            "Mechanics recorded for a Diablo II character must describe the legitimate game represented by this profile. Character Mechanics are intentionally scoped to what that character repeatedly needs; they are not a comprehensive class, skill, item, or build compendium. Research additional run-specific detail on demand and persist only what remains useful."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "current-state-semantics",
+      "Title": "Current-State Semantics",
+      "Rules": [
+        {
+          "Id": "quest-resource-and-mercenary-semantics",
+          "Title": "Quest, Resource & Mercenary Semantics",
+          "Content": [
+            "For CharacterState.QuestLog entries, State is the semantic progression field used for planning: NotStarted means the quest has not begun, InProgress means it is underway, and Completed means its quest objective is complete. Status preserves underlying quest-flag data as supporting raw information and should not override State unless the exporter is known to be wrong or incomplete.",
+            "IsOptional is strategic context. An unfinished optional quest is an available choice rather than an obligation, while a non-optional quest may constrain progression without automatically becoming the next objective.",
+            "CharacterState.ControlledResources is authoritative for tracked one-time Diablo II services and rewards such as Akara respecs, Charsi imbues, and Larzuk socketing. Do not reconstruct those counts from quest flags or duplicate them manually in Runtime Instructions. Exported mercenary identity, status, stats, skills, and equipment are likewise authoritative and should not be duplicated in manual mercenary-state sections."
+          ]
+        },
+        {
+          "Id": "stash-locator-semantics",
+          "Title": "Stash Locator Semantics",
+          "Content": [
+            "CharacterState.Stash is organized as named stash tabs, each containing its own Items collection. Empty tabs are valid state and remain represented with an empty Items list rather than disappearing or collapsing tab identity. Aggregate tabs such as Runes and Gems or Materials may use compact resource records when equipment-style positional fields are not meaningful.",
+            "For ordinary stash items, PosX and PosY are confirmed zero-based coordinates on the visible 10-by-10 stash grid: X increases left to right and Y increases top to bottom. Top-left is (0,0), top-right is (9,0), bottom-left is (0,9), and bottom-right is (9,9). Use TabName plus PosX/PosY as the preferred physical locator when an exact stash item must be identified. Translate coordinates into natural one-based player language such as \"Shared Tab 4, column 5, row 3.\"",
+            "ItemSeed, ItemLevel, and other exporter-only fields are internal identity, comparison, and verification data. When hidden state materially distinguishes otherwise similar items, map hidden identity to the physical item through authoritative tab and coordinate location. If reliable coordinates are unavailable or ambiguous, use a reversible disambiguation step such as moving one candidate to a known location and refreshing the export rather than guessing."
+          ]
+        },
+        {
+          "Id": "chronicle",
+          "Title": "Chronicle",
+          "Content": [
+            "The Chronicle branch carried into game-companion.json is a supplemental discovery log for Unique and Set items that have been acquired. It is not an equipment source, inventory source, review queue, completion checklist, or strategic authority. A Chronicle entry does not imply that an item still exists, was kept, should be equipped, should be evaluated, or deserves a gameplay stop.",
+            "Current ownership and location come from CharacterState inventory, equipment, and stash. Unique drops follow the active Unique stopping and preservation rules in Runtime Instructions. Set entries create no stop, preservation requirement, or review obligation unless another active rule explicitly says they do. Chronicle hunting may be chosen for fun, but missing entries create no obligation to complete the collection."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "reference-data-and-generator-pipeline",
+      "Title": "Reference Data & Generator Pipeline",
+      "Rules": [
+        {
+          "Id": "reference-outputs",
+          "Title": "Reference Outputs",
+          "Content": [
+            "For Diablo II, generated reference outputs are stored in the application's local data area rather than inside the public repository. They are produced from extracted game source data and used by the exporter to interpret save-derived state."
+          ]
+        },
+        {
+          "Id": "generator-paths",
+          "Title": "Generator Paths",
+          "Content": [
+            "The Python transformation scripts that produce those outputs live with the Diablo II exporter under its generators directory and are coordinated by generator.py. Ownership and generated-output mutation rules are governed by Authority."
+          ]
+        },
+        {
+          "Id": "missing-and-patch-sensitive-data",
+          "Title": "Missing & Patch-Sensitive Data",
+          "Content": [
+            "When a Diablo II decision requires information that is absent, unclear, incomplete, patch-sensitive, or strategically important, apply Core Truth's evidence and verification standards using Mechanics, reliable external research, or user observation as appropriate."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "diablo-ii-snapshot-and-diff-workflow",
+      "Title": "Diablo II Snapshot & Diff Workflow",
+      "Rules": [
+        {
+          "Id": "baseline-capture-trigger",
+          "Title": "Baseline Capture Trigger",
+          "Content": [
+            "For Diablo II, task baselines are character-scoped snapshots governed by Authority. Capture the baseline only after the farming or comparison task exists and at the prescribed start point for that workflow, normally immediately before the tracked gameplay begins."
+          ]
+        },
+        {
+          "Id": "baseline-payload",
+          "Title": "Baseline Payload",
+          "Content": [
+            "At that point, create or replace the baseline from fresh Diablo II adapter state before tracked gameplay starts. Unless the workflow requests a narrower comparison, preserve the entire CharacterState branch exactly as historical comparison state rather than copying unrelated companion rules, game rules, Journey history, or local journal data."
+          ]
+        },
+        {
+          "Id": "loot-comparison",
+          "Title": "Loot Comparison",
+          "Content": [
+            "At task completion, compare the baseline against freshly exported Diablo II CharacterState for loot only. Use nonzero ItemSeed to recognize the same individual item moving between equipment, inventory, mercenary equipment, or stash rather than treating it as new. For aggregated rune records or records whose ItemSeed is 0, compare stable fields such as BaseCode and Quantity. New Chronicle Unique/Set entries may be supplemental discovery evidence when relevant."
+          ]
+        },
+        {
+          "Id": "comparison-scope",
+          "Title": "Comparison Scope",
+          "Content": [
+            "Exclude gems, character level, attributes, skills, experience, and other non-loot state from the farming result. The comparison is a net retained-state record, not a complete event log; transient magic, rare, or other drops sold or discarded before the final export cannot be reconstructed unless another persistent exported record captures them."
+          ]
+        },
+        {
+          "Id": "run-log-recording",
+          "Title": "Run Log Recording",
+          "Content": [
+            "Record the completed farming task in Run Log with the run or target, meaningful conditions, and established item and rune outcome. Note material losses or consumption when they affect the net result."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "revision-diff-semantics",
+      "Title": "Revision Diff Semantics",
+      "Rules": [
+        {
+          "Id": "item-identity",
+          "Title": "Item Identity",
+          "Content": [
+            "When comparing Diablo II snapshots or successive exported states, match individual items by a nonzero ItemSeed when available. The same seed moving between character equipment, inventory, mercenary equipment, or stash is the same item changing location, not a new item. For aggregated resources or records whose ItemSeed is 0, compare stable fields such as BaseCode and Quantity."
+          ]
+        },
+        {
+          "Id": "temporal-sequence",
+          "Title": "Temporal Sequence",
+          "Content": [
+            "Use GeneratedAt, CharacterSaveModifiedAt, StashSaveModifiedAt, and the character's snapshot ordering to establish temporal sequence. Do not infer gameplay changes from exporter, schema, formatting, migration, or decoder-only changes."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "acquisition-research",
+      "Title": "Acquisition Research",
+      "Rules": [
+        {
+          "Id": "acquisition-validation",
+          "Title": "Acquisition Validation",
+          "Content": [
+            "When the AI wants to obtain a specific rune, item, base, crafting material, experience target, or other resource, verify eligibility before comparing efficiency. Confirm that the proposed source can actually produce or award the target under the intended difficulty, player count, monster, area, quest, or source-specific restrictions; when level-gated equipment or comparable drops are involved, account for item level, area or monster level, treasure class, and drop-table restrictions when materially relevant. Once eligibility is established, compare practical acquisition methods and choose the difficulty, player count, monsters, areas, and finite attempt structure that best serves the run. Use established Mechanics when they already answer the question and reliable current research when they do not. Do not create farming objectives from generic assumptions or memory when eligibility or efficiency is material."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "build-stats-and-equipment",
+      "Title": "Build, Stats & Equipment",
+      "Rules": [
+        {
+          "Id": "build-decision-verification",
+          "Title": "Build-Decision Verification",
+          "Content": [
+            "When evaluating skill-point allocation, stat-point allocation, class-specific breakpoints, item choices, runewords, mercenary choices, or other build-specific mechanics, verify current unmodified Diablo II: Resurrected values as needed before making the decision. Do not rely on memory when the choice depends on exact or patch-sensitive factual data."
+          ]
+        },
+        {
+          "Id": "stat-investment",
+          "Title": "Stat Investment",
+          "Content": [
+            "Stat points are a strategic reserve, not a protected score. When a meaningful equipment upgrade is blocked by an attribute requirement, evaluate the permanent stat cost against the item's value, expected longevity, build fit, progression stage, remaining reserve, and whether the investment unlocks other useful equipment. Account for reliable soft bonuses and spend only the minimum hard points needed. Spend when the resulting power, identity, or strategic value justifies the loss of flexibility; do not reject a strong, long-lived, build-defining, or best-in-slot item solely to preserve unspent points. A weak or short-lived upgrade may still be rejected when its permanent requirement cost is disproportionate."
+          ]
+        },
+        {
+          "Id": "mule-storage",
+          "Title": "Mule Storage",
+          "Content": [
+            "For Diablo II, mule characters may be used for additional storage when Preferences Truth's option-preservation policy makes that worthwhile. Mule storage does not change item ownership, strategic authority, or disposal rules."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "items-materials-and-runes",
+      "Title": "Items, Materials & Runes",
+      "Rules": [
+        {
+          "Id": "strategic-material-preservation",
+          "Title": "Strategic Material Preservation",
+          "Content": [
+            "Hoarded gems, jewels, runes, bases, and comparable materials are Diablo II strategic resources rather than free-use supplies. Preserve them until they are explicitly committed under the strategic-control policy in Preferences Truth."
+          ]
+        },
+        {
+          "Id": "rune-valuation",
+          "Title": "Rune Valuation",
+          "Content": [
+            "Rune rarity is one factor in deciding whether to commit a rune, not an independent rule that rarer runes must be hoarded. Evaluate practical replacement difficulty, current quantity, realistic farming access, and especially the opportunity cost of other relevant uses: which current or plausible future recipes need the rune, how valuable those recipes are to the character or mercenary, whether their other ingredients and suitable bases are realistically obtainable, and whether existing gear or alternate options make competing recipes less important.",
+            "A rare rune with few meaningful uses for the current run may be less strategically valuable than a more common rune that bottlenecks several desirable projects. Conversely, a low or mid rune may be spent readily when replaceable and the immediate use is worthwhile, even if another theoretical recipe also uses it.",
+            "Do not preserve a rune indefinitely merely because its drop chance is low, and do not consume one merely because it is common. Compare the concrete benefit available now against the believable value of preserving it for other options."
+          ]
+        },
+        {
+          "Id": "runeword-verification",
+          "Title": "Runeword Verification",
+          "Content": [
+            "Before directing any runeword socketing, verify the exact recipe, rune order, socket count, valid base type, and current Offline availability."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "player-count-and-difficulty",
+      "Title": "Player Count & Difficulty",
+      "Rules": [
+        {
+          "Id": "player-count",
+          "Title": "Player Count",
+          "Content": [
+            "Player-count setting is part of run direction and is a strategic tool the AI may use when defining a task. Players 1 is the fallback assumption only when a task does not specify a player count; it is not a preferred difficulty. Player count may be chosen for progression, farming, leveling, testing, challenge, pacing, or fun. When a task intends a setting other than Players 1, state it explicitly in the task package and consult Mechanics for scaling and drop-tier behavior."
+          ]
+        },
+        {
+          "Id": "difficulty-transitions",
+          "Title": "Difficulty Transitions",
+          "Content": [
+            "Once a difficulty is unlocked, it remains available and the character may return to any earlier accessible difficulty. Difficulty transitions are explicit run decisions rather than automatic after an act or difficulty is completed. Advancing is optional; lower difficulties may be used for farming bosses or areas, acquiring runes, bases, or items, testing, cows, experience, or simply because that content better serves the run."
+          ]
+        },
+        {
+          "Id": "difficulty-preflight",
+          "Title": "Difficulty Preflight",
+          "Content": [
+            "Before the first active task in a newly entered difficulty, perform a difficulty preflight during the preceding review or task creation. Evaluate current resistances under the new difficulty penalty, life and general survivability, critical equipment requirements, and any difficulty-specific mechanic likely to change safe continuation. Poor defensive numbers are evidence rather than an automatic farming mandate; the AI may deliberately enter at a conservative player count to test the current identity before changing gear or spending permanent resources."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "runeword-base-watchlist",
+      "Title": "Runeword Base Watchlist",
+      "Rules": [
+        {
+          "Id": "watchlist-purpose",
+          "Title": "Watchlist Purpose",
+          "Content": [
+            "The Runeword Base Watchlist in Runtime Instructions is the AI's active runeword wishlist and acquisition guide for base items, especially socketed bases the user must recognize and decide whether to pick up and preserve. It is not a comprehensive runeword catalog, a list of objectively best equipment, or a blanket stop list."
+          ]
+        },
+        {
+          "Id": "unique-exclusion",
+          "Title": "Unique Exclusion",
+          "Content": [
+            "Uniques do not belong on this wishlist merely because the AI would like to find them. Unique drops are already governed by the run's pickup and stopping rules, while base items require deliberate filtering because most cannot all be kept."
+          ]
+        },
+        {
+          "Id": "entry-requirements",
+          "Title": "Entry Requirements",
+          "Content": [
+            "Each runeword still considered strategically or creatively interesting must have its own entry containing the rune recipe, Valid Base Items, and any additional requirements. Remove an entry when the runeword is created, deliberately abandoned, or made sufficiently uninteresting by later gear or strategy. An entry may include a short Decision Note when craftable but deliberately deferred, dependent on later gear, or otherwise strategically interesting but not presently chosen."
+          ]
+        },
+        {
+          "Id": "entry-removal",
+          "Title": "Entry Removal",
+          "Content": [
+            "Removing an entry means only that it is no longer an active target; it does not declare the runeword permanently rejected, and it may be rediscovered or re-added later. Runes listed in an entry remain general stash resources unless the entry or another explicit decision reserves them."
+          ]
+        },
+        {
+          "Id": "reassessment-after-kept-items",
+          "Title": "Reassessment After Kept Items",
+          "Content": [
+            "Whenever a newly acquired item is deliberately kept, whether equipped or stashed, the next legitimate item-review pass must also reconsider the Runeword Base Watchlist before the review closes. The new item may make an old target redundant, create a new synergy, change which base is desirable, or make a previously uninteresting runeword worth pursuing. This review does not create an extra gameplay stop by itself."
+          ]
+        },
+        {
+          "Id": "stopping-qualification",
+          "Title": "Stopping Qualification",
+          "Content": [
+            "A base drop qualifies for the runeword-base Permanent Stopping Condition only when an exact base item is explicitly named in the entry, the dropped item matches that exact base and required socket count, and every rune listed for that runeword has already been acquired. Broad categories or subjective descriptions are ordinary review or stash candidates and do not stop the task merely because they could support a wishlist entry."
+          ]
+        }
+      ]
+    }
+  ]
+}

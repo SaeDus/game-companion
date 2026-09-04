@@ -1,0 +1,73 @@
+{
+  "SchemaVersion": 1,
+  "Id": "bootstrap-truth",
+  "Title": "Bootstrap Truth",
+  "Subtitle": "Commander Startup & Reconstruction Rules",
+  "Sections": [
+    {
+      "Id": "fresh-instance-reconstruction",
+      "Title": "Fresh-Instance Reconstruction",
+      "Rules": [
+        {
+          "Id": "reconstruction-order",
+          "Title": "Reconstruction Order",
+          "Content": [
+            "When a Commander instance begins without reliable conversation context, start with Authority to understand source ownership, scope selection, rule-layer meaning, and continuity boundaries. Then load Bootstrap Truth, Core Truth, the selected game's Game Truth, the selected character's Preferences Truth and Custom Truth, and the corresponding player-facing instruction layers before making strategic decisions.",
+            "Resolve the selected companion, game, and character described by Authority before relying on missing sources. When a portable game-companion.json is available, use it as the assembled AI-facing handoff. When working from the local Game Companion workspace, read the selected character's Runtime Instructions for current operational direction, use fresh adapter state for live state and freshness metadata, and consult Journey Tactical Findings and Mechanics as needed. Run Log is local player history rather than an AI continuity requirement.",
+            "If a required source is unavailable, do not fabricate it or silently substitute remembered state. Resolve the setup gap before making decisions that materially depend on that source. Completing reconstruction does not itself create a need for a new objective or strategic decision."
+          ]
+        },
+        {
+          "Id": "operational-state",
+          "Title": "Operational State",
+          "Content": [
+            "After reconstruction, classify the character according to Core Truth's task-lifecycle rules: Active when a complete current task package exists, Review when Core Truth's deliberate Review marker is present, or Unresolved when operational state is missing, malformed, internally contradictory, or materially conflicts with authoritative state.",
+            "Once classified, follow Core Truth's behavior for that state. Bootstrap Truth must not create a replacement task merely to eliminate uncertainty or merely because reconstruction has finished."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "fresh-character-initialization",
+      "Title": "Fresh-Character Initialization",
+      "Rules": [
+        {
+          "Id": "workspace-setup",
+          "Title": "Workspace Setup",
+          "Content": [
+            "When Game Companion initializes a fresh local workspace, establish the shipped project-wide defaults, selected companion defaults, selected game defaults, and a character directory created from the character template. Then connect the active game's current-state source and any snapshot or generated-reference facilities required by that game. Do not fabricate historical content, character state, or completed discoveries merely to fill the structure.",
+            "If this is a new character with no prior Journey or task state once the workspace is usable, begin from the user's explicit constraints, Preferences Truth, and Custom Truth. Within those boundaries, the Commander retains the strategic authority granted by those rules and should make the decisions assigned to it rather than asking the user to choose merely because no history exists."
+          ]
+        },
+        {
+          "Id": "initial-durable-state",
+          "Title": "Initial Durable State",
+          "Content": [
+            "Initialize only durable state that is actually established. When creating fresh Runtime Instructions from the character template, deliberately define any permanent stopping policy required by Core Truth and create operational queues, tracking criteria, and watchlists only as needed. Empty queues and watchlists are valid.",
+            "Mechanics, Run Log, Journey, Custom Instructions, and character-specific Truth files may begin empty or with only their template structure until real information exists. Do not fabricate prior discoveries, doctrine, resources, completed objectives, historical context, placeholder examples, or speculative goals merely to fill the structure."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "bootstrap-completion",
+      "Title": "Bootstrap Completion",
+      "Rules": [
+        {
+          "Id": "completion-criteria",
+          "Title": "Completion Criteria",
+          "Content": [
+            "Bootstrap Truth is complete when the selected companion, game, character, current-state source, and required rule files have been located or established, their ownership is understood, the active layers have been read, and operational state has been classified. From that point onward, normal decisions are governed by Core Truth, Game Truth, Preferences Truth, Custom Truth, and the active player-facing instruction layers rather than by startup procedure."
+          ]
+        },
+        {
+          "Id": "handoff-persistence",
+          "Title": "Handoff Persistence",
+          "Content": [
+            "Before gameplay resumes, persist any reconstruction decision that a later fresh instance would need in the owning domain. Do not rely on the bootstrap conversation itself as durable continuity."
+          ]
+        }
+      ]
+    }
+  ]
+}

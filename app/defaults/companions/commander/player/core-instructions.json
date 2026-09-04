@@ -1,0 +1,122 @@
+{
+  "SchemaVersion": 1,
+  "Id": "core-instructions",
+  "Title": "Core Instructions",
+  "Subtitle": "Commander Player Execution Rules",
+  "Sections": [
+    {
+      "Id": "task-execution-and-reporting",
+      "Title": "Task Execution & Reporting",
+      "Rules": [
+        {
+          "Id": "task-package",
+          "Title": "Task Package",
+          "Content": [
+            "Follow the active Current Task, Strategy, and Early Report Conditions in Runtime Instructions as one task package. Do not invent or begin a different objective when that package is absent, under review, or suspended by a report condition."
+          ]
+        },
+        {
+          "Id": "stopping-condition-response",
+          "Title": "Stopping-Condition Response",
+          "Content": [
+            "When any active Permanent Stopping Condition or Early Report Condition triggers, stop and report before continuing. A triggered condition pauses the active objective; it does not by itself cancel or replace that objective."
+          ]
+        },
+        {
+          "Id": "review-state",
+          "Title": "Review State",
+          "Content": [
+            "When Current Task, Strategy, and Early Report Conditions each say \"Review in progress.\", gameplay is paused. Do not resume progression until a new complete task package has been provided."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "strategic-control",
+      "Title": "Strategic Control",
+      "Rules": [
+        {
+          "Id": "explicit-run-decisions",
+          "Title": "Explicit Run Decisions",
+          "Content": [
+            "Carry out strategic equipment, inventory, resource, build, or other run actions only when an explicit run decision or pending Quick Instruction Queue entry directs them. Routine reversible execution may adapt as needed, but do not convert tactical freedom into unrequested strategic commitments."
+          ]
+        },
+        {
+          "Id": "irreversible-actions",
+          "Title": "Irreversible Actions",
+          "Content": [
+            "Once an explicit irreversible run decision has been carried out in game, treat the result as binding. Discarded items are gone, and consumed or spent resources remain committed unless the game legitimately provides a reversal."
+          ]
+        },
+        {
+          "Id": "option-preservation",
+          "Title": "Option Preservation",
+          "Content": [
+            "Preserve strategic resources, irreversible choices, and uncertain items when no explicit direction resolves them. Do not improvise permanent substitutions when an instruction cannot be completed as written; report the problem instead."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "equipment-and-inventory-execution",
+      "Title": "Equipment & Inventory Execution",
+      "Rules": [
+        {
+          "Id": "disposition-control",
+          "Title": "Disposition Control",
+          "Content": [
+            "Equip, stash, test, move, or discard items according to explicit run decisions and the active queues or watchlists. Do not independently convert a potential upgrade or interesting item into a permanent keep, sale, craft, or disposal decision."
+          ]
+        },
+        {
+          "Id": "tracked-gear-preservation",
+          "Title": "Tracked Gear Preservation",
+          "Content": [
+            "When Runtime Instructions or an active report condition identifies gear for review, preserve it until its disposition has been decided."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "queue-execution",
+      "Title": "Queue Execution",
+      "Rules": [
+        {
+          "Id": "loot-review-queue",
+          "Title": "Loot Review Queue",
+          "Content": [
+            "Treat the Loot Review Queue as a review inbox. Preserve the referenced items and allow them to accumulate until the next legitimate review unless a stopping condition requires an immediate interruption. Once a queued item has been reviewed and its disposition decided, it no longer requires review."
+          ]
+        },
+        {
+          "Id": "quick-instruction-queue",
+          "Title": "Quick Instruction Queue",
+          "Content": [
+            "Carry out Quick Instruction Queue entries exactly as written before gameplay resumes. These are immediate execution commands rather than a replacement for the active task. If an entry cannot be completed safely or literally, leave it unresolved and report the problem rather than improvising."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "manual-tracking-and-watchlists",
+      "Title": "Manual Tracking & Watchlists",
+      "Rules": [
+        {
+          "Id": "manual-item-tracking",
+          "Title": "Manual Item Tracking",
+          "Content": [
+            "During play, use the current Manual Item Tracking criteria in Runtime Instructions as the player-facing filter for items that deserve preservation or later review when automatic tracking alone is insufficient."
+          ]
+        },
+        {
+          "Id": "runeword-base-watchlist",
+          "Title": "Runeword Base Watchlist",
+          "Content": [
+            "During play, use the current Runeword Base Watchlist in Runtime Instructions to recognize desired bases. Only its active entries and their exact stated conditions should influence what must be preserved or what can trigger a report."
+          ]
+        }
+      ]
+    }
+  ]
+}

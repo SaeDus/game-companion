@@ -1,0 +1,54 @@
+{
+  "SchemaVersion": 1,
+  "Id": "runtime-instructions",
+  "Title": "Runtime",
+  "Subtitle": "Live Run Direction & Task Board",
+  "Sections": [
+    {
+      "Id": "objectives",
+      "Title": "Objectives",
+      "Rules": [
+        {
+          "Id": "current-task",
+          "Title": "Current Task",
+          "Content": []
+        },
+        {
+          "Id": "strategy",
+          "Title": "Strategy",
+          "Content": []
+        },
+        {
+          "Id": "early-report-conditions",
+          "Title": "Early Report Conditions",
+          "Content": []
+        }
+      ]
+    },
+    {
+      "Id": "permanent-stopping-conditions",
+      "Title": "Permanent Stopping Conditions",
+      "Rules": []
+    },
+    {
+      "Id": "loot-review-queue",
+      "Title": "Loot Review Queue",
+      "Rules": []
+    },
+    {
+      "Id": "quick-instruction-queue",
+      "Title": "Quick Instruction Queue",
+      "Rules": []
+    },
+    {
+      "Id": "manual-item-tracking",
+      "Title": "Manual Item Tracking",
+      "Rules": []
+    },
+    {
+      "Id": "runeword-base-watchlist",
+      "Title": "Runeword Base Watchlist",
+      "Rules": []
+    }
+  ]
+}

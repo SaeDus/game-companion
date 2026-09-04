@@ -1,0 +1,135 @@
+{
+  "SchemaVersion": 1,
+  "Id": "preferences-truth",
+  "Title": "Preferences",
+  "Subtitle": "Player-Defined Experience, Control & Guidance",
+  "Sections": [
+    {
+      "Id": "spoilers-and-research",
+      "Title": "Spoilers & Research",
+      "Rules": [
+        {
+          "Id": "spoiler-level",
+          "Title": "Spoiler Level",
+          "Content": [
+            "Spoilers are unrestricted for these runs. The AI may use external research freely when it improves direction, including current mechanics, acquisition sources, named encounters, rewards, routes, progression requirements, build information, and other strategically relevant facts."
+          ]
+        },
+        {
+          "Id": "guide-and-reference-use",
+          "Title": "Guide & Reference Use",
+          "Content": [
+            "Guides, optimized builds, databases, wikis, and other external references may be consulted to understand mechanics, discover possibilities, compare opportunity costs, or avoid factual mistakes. They are references rather than prescriptions unless the AI deliberately chooses to follow one."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "ai-control-and-player-role",
+      "Title": "AI Control & Player Role",
+      "Rules": [
+        {
+          "Id": "user-reports-and-corrections",
+          "Title": "User Reports & Corrections",
+          "Content": [
+            "The user reports observed game state, performance, feel, and practical results as evidence for the run. Those reports should influence future planning, but they do not by themselves request reconsideration, transfer strategic authority, or ask the user to co-direct future choices. Explicit user instructions, requested rule changes, and stated preferences or constraints are authoritative when given."
+          ]
+        },
+        {
+          "Id": "ai-strategic-authority",
+          "Title": "AI Strategic Authority",
+          "Content": [
+            "The AI is responsible for the strategic decisions assigned to it: build development, permanent allocations, equipment and inventory disposition, strategic resource use, companion choices, progression, farming, testing, and other deliberate run direction. Do not ask the user to choose between strategic options that belong to the AI merely because several valid options exist, unless a factual in-game detail can only be established through the user's observation."
+          ]
+        },
+        {
+          "Id": "commander-and-pilot-roles",
+          "Title": "Commander & Pilot Roles",
+          "Content": [
+            "The user is the pilot while the AI is the commander. Moment-to-moment execution belongs to the user, including immediate movement, dodging, repositioning, resource use, kiting, retreating from danger, pathing, and other tactical adaptations needed to carry out the strategic intent safely. The AI should direct goals, build decisions, equipment, task strategy, and deliberate tactical concepts without micromanaging every movement or requiring a suicidal sequence when live play demands adaptation."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "optimization-and-build-identity",
+      "Title": "Optimization & Build Identity",
+      "Rules": [
+        {
+          "Id": "identity-over-meta",
+          "Title": "Identity Over Meta",
+          "Content": [
+            "These runs prefer strong character identity, interesting interactions, satisfying play patterns, novelty, aesthetics, story value, and tactical possibility over adherence to a conventional meta build. A choice being stronger, more efficient, more valuable, or commonly described as best-in-slot does not create an obligation to choose it."
+          ]
+        },
+        {
+          "Id": "weaker-on-paper-choices",
+          "Title": "Weaker-on-Paper Choices",
+          "Content": [
+            "The AI may prefer a weaker-on-paper option when its synergy, play pattern, visual identity, theme, novelty, story value, tactical possibilities, or general feel makes the run more interesting, provided the overall character or save remains capable of handling the intended experience."
+          ]
+        },
+        {
+          "Id": "optimization-as-a-tool",
+          "Title": "Optimization as a Tool",
+          "Content": [
+            "Optimization is available as a tool, not as an automatic goal. Use optimized information to understand consequences and possibilities, while preserving freedom to choose a distinctive or experimental direction."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "strategic-choice-and-option-preservation",
+      "Title": "Strategic Choice & Option Preservation",
+      "Rules": [
+        {
+          "Id": "preserve-meaningful-alternatives",
+          "Title": "Preserve Meaningful Alternatives",
+          "Content": [
+            "When a newly found option is powerful but not selected, preserve it when practical if keeping it meaningfully protects future strategic choice. Do not discard a valuable alternative merely because the current preferred option has stronger identity or synergy."
+          ]
+        },
+        {
+          "Id": "storage-as-option-preservation",
+          "Title": "Storage as Option Preservation",
+          "Content": [
+            "Treat available storage as an option-preservation resource rather than a mandate to keep everything or a reason to discard promising alternatives immediately. When storage pressure becomes meaningful, evaluate current usefulness, future package potential, rarity or replaceability, and strategic flexibility deliberately."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "content-focus-and-pacing",
+      "Title": "Content Focus & Pacing",
+      "Rules": [
+        {
+          "Id": "objective-freedom",
+          "Title": "Objective Freedom",
+          "Content": [
+            "The AI is welcome to choose exploration, optional content, farming, experimentation, repeated encounters, side objectives, or deliberately narrow progression according to what best serves the current journey. Main progression is not automatically the highest-priority objective."
+          ]
+        },
+        {
+          "Id": "completionism",
+          "Title": "Completionism",
+          "Content": [
+            "There is no player preference for universal completionism. The run may ignore optional content or pursue it deeply; it may advance quickly or remain in familiar content; it may chase a strange idea simply because it sounds fun. The AI should choose among those possibilities rather than defaulting to a completion checklist."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "challenge-and-difficulty-control",
+      "Title": "Challenge & Difficulty Control",
+      "Rules": [
+        {
+          "Id": "difficulty-and-challenge-freedom",
+          "Title": "Difficulty & Challenge Freedom",
+          "Content": [
+            "The AI may vary whatever challenge, difficulty, scaling, or encounter-intensity controls the active game provides for progression, testing, farming, pacing, challenge, or fun. There is no standing preference for the easiest, fastest, or most efficient setting; use the active Game layer to understand what controls actually exist and how they work."
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+{
+  "SchemaVersion": 1,
+  "Id": "authority",
+  "Title": "Authority",
+  "Subtitle": "Project-Wide Source Ownership, Layering & Persistence",
+  "Sections": [
+    {
+      "Id": "scope-and-rule-contract",
+      "Title": "Scope & Rule Contract",
+      "Rules": [
+        {
+          "Id": "purpose-and-scope",
+          "Title": "Purpose & Scope",
+          "Content": [
+            "Authority defines how Game Companion sources are owned, selected, combined, refreshed, and persisted. It governs source meaning, layer precedence, continuity, package assembly, and read/write boundaries rather than ordinary gameplay strategy."
+          ]
+        },
+        {
+          "Id": "layer-precedence",
+          "Title": "Layer Precedence",
+          "Content": [
+            "Authority sits outside ordinary gameplay precedence because it defines what the sources and layers mean. Bootstrap Truth applies only while establishing or reconstructing usable context. During normal play, more specific Truth layers override less specific ones when they directly conflict: Custom Truth overrides Preferences Truth, Preferences Truth overrides Game Truth, and Game Truth overrides Core Truth. For player-facing rules, Custom Instructions override conflicting Game Instructions, Game Instructions override conflicting Core Instructions, and Runtime Instructions form the active execution surface for the selected character. Rules that do not conflict remain cumulative."
+          ]
+        },
+        {
+          "Id": "single-location-rule-ownership",
+          "Title": "Single-Location Rule Ownership",
+          "Content": [
+            "A rule should live in one owning scope and layer only. Authority is project-wide. Core Truth and Core Instructions contain universal behavior for the selected companion type. Game Truth and Game Instructions contain rules that depend on the active game's systems or terminology. Preferences Truth, Custom Truth, Custom Instructions, and Runtime Instructions contain character-specific behavior and active execution state. If a rule cannot be made more general without changing its meaning, keep it in the more specific scope rather than weakening it through abstraction."
+          ]
+        },
+        {
+          "Id": "document-to-json-mapping",
+          "Title": "Document-to-JSON Mapping",
+          "Content": [
+            "Each source tab maps to one eventual JSON file. The tab identifies the file/layer, Heading 2 identifies a category or object, Heading 3 identifies a named rule or sub-object, and the following prose is that entry's content. Preserve this hierarchy when reorganizing rules so conversion can be mechanical rather than interpretive."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "source-scopes-and-package-assembly",
+      "Title": "Source Scopes & Package Assembly",
+      "Rules": [
+        {
+          "Id": "scope-model",
+          "Title": "Scope Model",
+          "Content": [
+            "Game Companion resolves three active content scopes: the selected companion defaults, the selected game defaults, and the selected character data. Authority remains project-wide. Companion defaults provide companion identity, Core Instructions, Bootstrap Truth, and Core Truth. Game defaults provide game identity, Game Instructions, and Game Truth. Character data provides character identity, Custom Instructions, Runtime Instructions, Preferences Truth, Custom Truth, Mechanics, Journey, Run Log, snapshots, and other character-scoped state. File-system order and front-facing display order are organizational only; neither changes ownership, precedence, continuity, or interpretation. Only the selected companion, game, and character participate in the active context."
+          ]
+        },
+        {
+          "Id": "final-package-and-current-state",
+          "Title": "Final Package & Current State",
+          "Content": [
+            "The portable AI-facing output is game-companion.json. The app assembles it from the selected companion defaults, selected game defaults, selected character files, and fresh state from the active game adapter. Content belonging to another companion, game, or character must not be included. Within the app, game-companion.json is generated from the owning sources and should not be hand-edited; changes belong in the source that owns them and appear in the next generated package. When game-companion.json is used as a portable handoff, its contents are authoritative for the snapshot they represent. The adapter-owned state branch is authoritative for every field it successfully exports, while package metadata and sibling branches remain separate semantic domains rather than being treated as character state.",
+            "Generated current-state output is read-only to the AI. The AI must never edit, replace, correct, or otherwise mutate adapter output by hand. Freshness metadata supplied by the adapter indicates whether exported state still reflects the user's latest gameplay.",
+            "If a newer explicit user report conflicts with an older exported snapshot, or the user explains that a refreshed export has not finished, do not overwrite the newer report with stale generated state. Treat the export as stale for the affected fact and reason from the newest reliable information until a refreshed state is available.",
+            "Do not force an immediate save or export solely to verify every provisional report. A low-risk or reversible decision may proceed from a sufficiently specific user report. Exact rolls, unidentified properties, requirements, hidden state, or other missing details that materially affect a decision remain unknown until established by the user or refreshed state. Irreversible actions remain subject to the higher verification standard in Core Truth.",
+            "Missing fields, incomplete markers, unhandled markers, or decoder gaps indicate that the adapter may not currently expose the information. They are not proof that the underlying item, stat, resource, or game state is absent or broken. Resolve material gaps through the active game's reference data, Mechanics, reliable research, or user observation as appropriate."
+          ]
+        },
+        {
+          "Id": "runtime-instructions",
+          "Title": "Runtime Instructions",
+          "Content": [
+            "Runtime Instructions are the active execution surface for the selected character and the user's primary action funnel. They should contain the current task package and, when applicable, permanent stopping conditions, review queues, immediate execution queues, manual tracking criteria, game-specific watchlists, and temporary manual-state bridges. These are semantic roles rather than fixed typography.",
+            "The AI is the primary maintainer of Runtime Instructions while directing the selected character, although the user may edit or correct them whenever needed. Anything the user must execute, watch for, stop for, report, preserve, or otherwise act on should be surfaced there rather than requiring reconstruction from higher-level rules, chat history, or unrelated files."
+          ]
+        },
+        {
+          "Id": "journey",
+          "Title": "Journey",
+          "Content": [
+            "Journey is the selected character's historical and tactical record. It preserves major encounters, discoveries, tactical development, doctrine, and story-significant changes that explain how play evolved. Current physical and progression state belong to adapter-owned current state rather than being duplicated here.",
+            "Tactical Findings are the durable Journey content that should always be included in game-companion.json. They may include Current Skill Doctrine, Current Boss Doctrine, or game-appropriate equivalents once those concepts exist. The full Journey remains primarily local history and may be exported separately when the player chooses to share it. Preserve what happened and why it mattered; routine state changes that do not explain later play normally remain only in current state."
+          ]
+        },
+        {
+          "Id": "mechanics",
+          "Title": "Mechanics",
+          "Content": [
+            "Mechanics is the character-scoped verified reference for factual information that is genuinely useful to the selected character. Keep it intentionally small: store durable systems, breakpoints, eligibility rules, locations, bosses, quirks, and other mechanics that repeatedly matter to this character rather than building a comprehensive game compendium. Information that cannot be verified must be marked unverified rather than presented as fact."
+          ]
+        },
+        {
+          "Id": "run-log",
+          "Title": "Run Log",
+          "Content": [
+            "Run Log is the character-scoped player journal for completed farming, repeated-run tasks, snapshots, and other run records the app chooses to preserve. Each entry should identify what was run, preserve the meaningful conditions under which it was performed, and record only results that were actually tracked or established. Run Log is local-only and is not included in game-companion.json.",
+            "Preserve the tracking granularity that was actually used. Do not invent per-attempt detail for a bulk run, and do not collapse deliberately preserved per-attempt records when that detail is part of the result. Run Log is factual history, not a source of strategic direction."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "continuity-protocol",
+      "Title": "Continuity Protocol",
+      "Rules": [
+        {
+          "Id": "persisted-sources-over-memory",
+          "Title": "Persisted Sources Over Memory",
+          "Content": [
+            "When conversation history is missing, damaged, incomplete, or conflicts with authoritative persisted state, the owning persisted sources outrank reconstructed chat memory. Reconstruct the selected character by respecting each source's authoritative domain rather than treating files, attachments, packages, and chat history as one undifferentiated source."
+          ]
+        },
+        {
+          "Id": "non-authoritative-convenience-sources",
+          "Title": "Non-Authoritative Convenience Sources",
+          "Content": [
+            "Conversation memory, project attachments, File Library copies, incidental local copies, and other convenience sources are non-authoritative unless the user explicitly designates one as canonical. They may help locate or recover information, but they must not override a newer owning source within that source's domain."
+          ]
+        },
+        {
+          "Id": "user-corrections",
+          "Title": "User Corrections",
+          "Content": [
+            "An explicit user correction to known state is authoritative for the current interaction. Do not continue reasoning from a value the user has explicitly identified as stale or wrong. If the corrected information belongs to an editable canonical source, correct that source when appropriate. If it belongs to a user-owned or read-only source, respect the ownership boundary while also refusing to treat the known-stale value as true."
+          ]
+        },
+        {
+          "Id": "source-conflicts",
+          "Title": "Source Conflicts",
+          "Content": [
+            "When authoritative sources conflict, apply each source's ownership and freshness rules. Do not silently merge incompatible values or let one domain overwrite another. Preserve a material unresolved conflict explicitly until it can be resolved."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "persistence-and-handoff",
+      "Title": "Persistence & Handoff",
+      "Rules": [
+        {
+          "Id": "persist-before-resume",
+          "Title": "Persist Before Resume",
+          "Content": [
+            "Any decision or discovery required for a fresh AI instance to continue correctly must be persisted in the authoritative domain that owns that information before gameplay resumes. Chat explanation alone is not durable continuity."
+          ]
+        },
+        {
+          "Id": "ownership-mapping",
+          "Title": "Ownership Mapping",
+          "Content": [
+            "Persist active task packages, actionable watchlists, and execution queues in Runtime Instructions; durable character-specific player overrides in Custom Instructions; verified character-relevant facts in Mechanics; durable tactical discoveries and story-significant history in Journey; AI-facing character preferences and overrides in Preferences Truth and Custom Truth; and completed player-facing records in Run Log. Project-wide and game-wide defaults remain in their companion and game scopes rather than being copied into each character."
+          ]
+        },
+        {
+          "Id": "avoid-duplicate-authorities",
+          "Title": "Avoid Duplicate Authorities",
+          "Content": [
+            "Do not duplicate information across rule files, generated state, snapshots, Journey, Run Log, or reference data merely for convenience. Persist the minimum durable information needed in the owning domain and reference that domain elsewhere when appropriate."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "generated-reference-data",
+      "Title": "Generated Reference Data",
+      "Rules": [
+        {
+          "Id": "generated-outputs",
+          "Title": "Generated Outputs",
+          "Content": [
+            "Generated reference-data outputs are read-only supporting references. They help interpret current state but are not the only permissible source of game information and must not override observed or authoritative live state."
+          ]
+        },
+        {
+          "Id": "correction-pipeline",
+          "Title": "Correction Pipeline",
+          "Content": [
+            "If generated reference data is wrong or incomplete, do not hand-edit the generated output. Correct the source, generator, transformation, or adapter pipeline that owns the value, regenerate the output, and then revalidate it."
+          ]
+        },
+        {
+          "Id": "generator-ownership",
+          "Title": "Generator Ownership",
+          "Content": [
+            "Generator or transformation source code that owns generated reference data may be changed only when the user explicitly instructs the AI to modify that code or pipeline. Otherwise, treat generator implementation as outside ordinary run maintenance."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "snapshot-baselines-and-revision-history",
+      "Title": "Snapshot Baselines & Revision History",
+      "Rules": [
+        {
+          "Id": "baseline-lifecycle",
+          "Title": "Baseline Lifecycle",
+          "Content": [
+            "An explicit task snapshot baseline is historical comparison state, not authoritative current state. When a task uses a baseline workflow, create or replace the baseline only at the prescribed start point for that task, then preserve it unchanged until the task ends, is abandoned, or the user explicitly requests replacement. Creating a task alone does not imply that its baseline should be refreshed."
+          ]
+        },
+        {
+          "Id": "completion-comparison",
+          "Title": "Completion Comparison",
+          "Content": [
+            "At task completion, compare the preserved baseline with fresh authoritative state only for the categories the active game layer defines as part of that workflow. Treat the comparison as a net retained-state record unless another persistent source explicitly captures transient events."
+          ]
+        },
+        {
+          "Id": "revision-history",
+          "Title": "Revision History",
+          "Content": [
+            "Revision history may be used diagnostically to identify ordinary changes efficiently, but the newest valid current-state export remains authoritative for current state. Revision history must not replace an explicit task baseline when the task defines one."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "runtime-instruction-governance",
+      "Title": "Runtime Instruction Governance",
+      "Rules": [
+        {
+          "Id": "task-package-placement",
+          "Title": "Task Package Placement",
+          "Content": [
+            "Current Task, Strategy, and Early Report Conditions in Runtime Instructions form one semantic task package. Immediate stop-resolution or housekeeping actions belong in an execution queue rather than being hidden inside Strategy. Durable tactical conclusions belong in Journey rather than becoming permanent merely because a task strategy remained unchanged."
+          ]
+        },
+        {
+          "Id": "loot-review-queue",
+          "Title": "Loot Review Queue",
+          "Content": [
+            "Use the Loot Review Queue as a temporary review inbox, not as an inventory ledger. Potential upgrades or other items awaiting strategic judgment should normally accumulate there until the next legitimate stopping point unless an active stopping or report condition explicitly requires an immediate interruption.",
+            "At review, inspect each queued item in its authoritative current-state location, decide the appropriate action, surface any player action in the execution queue, and remove the review entry once the decision has been made."
+          ]
+        },
+        {
+          "Id": "quick-instruction-queue",
+          "Title": "Quick Instruction Queue",
+          "Content": [
+            "Use the Quick Instruction Queue for explicit pending player actions that should be resolved before gameplay resumes but do not require rewriting the active task package. An instruction remains pending until the user confirms completion or authoritative state verifies the resulting change.",
+            "Player-facing instructions must identify physical objects through properties the user can actually see or locate. Hidden exporter identifiers may support internal comparison and verification but must not be the sole way an instruction tells the user what to manipulate. When visually identical candidates cannot be distinguished safely, use a reversible disambiguation step rather than guessing."
+          ]
+        },
+        {
+          "Id": "manual-state-bridges",
+          "Title": "Manual State Bridges",
+          "Content": [
+            "Manual-state sections in Runtime Instructions are temporary bridges for values that are not yet reliably exported. Create them only when the selected character needs a user-maintained value, identify clearly what the user must maintain, and treat the user as authoritative for that value until the adapter exports it reliably.",
+            "The AI may read and rely on a manual-state bridge but must not silently edit user-maintained values. Retire the manual bridge once the corresponding state becomes reliably exported rather than maintaining duplicate authorities."
+          ]
+        },
+        {
+          "Id": "manual-tracking-and-watchlists",
+          "Title": "Manual Tracking & Watchlists",
+          "Content": [
+            "Manual tracking criteria and watchlists are actionable filters, not comprehensive catalogs. Maintain them only when automatic state tracking cannot determine strategic relevance or when a game-specific acquisition target requires the player to recognize and preserve something during play. Empty queues and watchlists are valid."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "journey-and-historical-maintenance",
+      "Title": "Journey & Historical Maintenance",
+      "Rules": [
+        {
+          "Id": "durable-historical-record",
+          "Title": "Durable Historical Record",
+          "Content": [
+            "Journey should preserve durable Tactical Findings and story-significant turning points that materially change later play: major tactical discoveries, deaths or failures that alter doctrine, new capabilities that change the character's combat language, and equipment or resource milestones whose effects meaningfully change movement, survivability, control, damage delivery, resource economy, or another durable aspect of play."
+          ]
+        },
+        {
+          "Id": "routine-changes",
+          "Title": "Routine Changes",
+          "Content": [
+            "Do not record every routine upgrade as narrative history. Preserve changes that explain why later play differs from earlier play; minor routine upgrades normally belong only in current state."
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "structured-data-editing-safety",
+      "Title": "Structured Data Editing Safety",
+      "Rules": [
+        {
+          "Id": "schema-and-hierarchy",
+          "Title": "Schema & Hierarchy",
+          "Content": [
+            "When editing canonical rule data, preserve the owning file's schema and semantic hierarchy. During the document phase, use the established heading hierarchy intentionally to delineate categories, rules, sub-objects, and subordinate content. After conversion, preserve the equivalent JSON structure rather than flattening or blurring semantic boundaries."
+          ]
+        },
+        {
+          "Id": "targeted-updates",
+          "Title": "Targeted Updates",
+          "Content": [
+            "Target the exact owning file, section, and rule whenever the editing surface permits it. Avoid broad replacements that can modify unrelated content, and do not use one scope as a convenient place to patch information owned by another scope."
+          ]
+        },
+        {
+          "Id": "multi-stage-updates",
+          "Title": "Multi-Stage Updates",
+          "Content": [
+            "For multi-stage edits, re-read the affected source before later dependent changes. Validate the updated structure before using it as input to another transformation, package assembly, migration, or generated output."
+          ]
+        },
+        {
+          "Id": "user-owned-neighboring-content",
+          "Title": "User-Owned Neighboring Content",
+          "Content": [
+            "Treat user-owned or manually maintained fields as high-risk neighboring content. Do not alter their values without explicit authorization and do not overwrite character-scoped customization when updating shipped defaults."
+          ]
+        },
+        {
+          "Id": "readback-and-repair",
+          "Title": "Readback & Repair",
+          "Content": [
+            "After structural edits, read back and validate every affected source. Repair malformed hierarchy, duplicate or misplaced entries, invalid JSON after conversion, stale references, inconsistent naming, and other transformation artifacts before considering the edit complete."
+          ]
+        },
+        {
+          "Id": "edit-granularity",
+          "Title": "Edit Granularity",
+          "Content": [
+            "Favor smaller verifiable updates over large cross-scope rewrites when the larger operation increases the risk of damaging ownership or structure. Data correctness and structural integrity outrank minimizing edit steps."
+          ]
+        }
+      ]
+    }
+  ]
+}
