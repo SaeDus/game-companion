@@ -10,7 +10,28 @@
     "opener:default",
     "dialog:default",
     "fs:default",
+    "fs:allow-copy-file",
+    "fs:allow-exists",
+    "fs:allow-mkdir",
+    "fs:read-dirs",
     "fs:allow-write-text-file",
+    {
+      "identifier": "fs:scope",
+      "allow": [
+        {
+          "path": "$RESOURCE/defaults"
+        },
+        {
+          "path": "$RESOURCE/defaults/**/*"
+        },
+        {
+          "path": "$LOCALDATA/game-companion"
+        },
+        {
+          "path": "$LOCALDATA/game-companion/**/*"
+        }
+      ]
+    },
     "shell:default",
     {
       "identifier": "shell:allow-execute",
