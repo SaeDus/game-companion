@@ -8,6 +8,8 @@ import {
 
 const RESOURCE_DEFAULTS_DIRECTORY = "defaults";
 const WORKSPACE_DIRECTORY = "game-companion";
+const CHARACTERS_DIRECTORY = "characters";
+const SKIPPED_ROOT_DIRECTORIES = new Set(["templates"]);
 
 export interface InitializationResult {
   createdDirectories: string[];
@@ -47,7 +49,8 @@ async function ensureWorkspaceDirectory(
 async function copyMissingDefaults(
   sourcePath: string,
   destinationRelativePath: string,
-  result: InitializationResult
+  result: InitializationResult,
+  isRoot = false
 ): Promise<void> {
   await ensureWorkspaceDirectory(destinationRelativePath, result);
 
@@ -56,6 +59,14 @@ async function copyMissingDefaults(
   });
 
   for (const entry of entries) {
+    if (
+      isRoot &&
+      entry.isDirectory &&
+      SKIPPED_ROOT_DIRECTORIES.has(entry.name)
+    ) {
+      continue;
+    }
+
     const sourceEntryPath = joinRelativePath(sourcePath, entry.name);
     const destinationEntryRelativePath = joinRelativePath(
       destinationRelativePath,
@@ -107,8 +118,11 @@ export async function initializeWorkspace(): Promise<InitializationResult> {
   await copyMissingDefaults(
     RESOURCE_DEFAULTS_DIRECTORY,
     "",
-    result
+    result,
+    true
   );
+
+  await ensureWorkspaceDirectory(CHARACTERS_DIRECTORY, result);
 
   return result;
 }
