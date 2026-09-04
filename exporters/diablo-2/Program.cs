@@ -134,6 +134,7 @@ public class Data
         return Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             "game-companion",
+            "games",
             "diablo-2",
             "data"
         );

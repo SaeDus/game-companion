@@ -175,8 +175,8 @@ function GameStateBuilder() {
       //   "../../exporters/diablo-2/d2-reader.csproj",
       //   "--",
       //   "initialize",
-      //   "<path_to_source_files>"
-      //   "<path_to_data_directory>"
+      //   "<path_to_source_files>",
+      //   "<path_to_data_directory>",
       // ]).execute();
 
       if (result.stderr.trim()) {
