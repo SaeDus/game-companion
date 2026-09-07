@@ -9,6 +9,8 @@ public class ItemState
 
     public string? Name { get; set; }
     public string BaseName { get; set; } = "";
+
+    [JsonIgnore]
     public string BaseCode { get; set; } = "";
 
     public int? ItemLevel { get; set; }

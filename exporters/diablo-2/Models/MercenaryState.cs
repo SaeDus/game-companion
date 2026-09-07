@@ -1,5 +1,11 @@
-public class MercenaryState {
+using System.Text.Json.Serialization;
+
+public class MercenaryState
+{
+    [JsonIgnore]
     public int Id { get; set; }
+
+    [JsonIgnore]
     public int NameIndex { get; set; }
 
     public string? Name { get; set; }
@@ -7,6 +13,8 @@ public class MercenaryState {
     public string? SubType { get; set; }
 
     public int? Level { get; set; }
+
+    [JsonIgnore]
     public uint Experience { get; set; }
 
     public int? Strength { get; set; }

@@ -1,3 +1,8 @@
 {
-  "SchemaVersion": 1
+  "SchemaVersion": 1,
+  "Id": "diablo-2",
+  "Includes": [
+    "game-instructions",
+    "game-truth"
+  ]
 }

@@ -1,3 +1,9 @@
 {
-  "SchemaVersion": 1
+  "SchemaVersion": 1,
+  "Id": "commander",
+  "Includes": [
+    "core-instructions",
+    "bootstrap-truth",
+    "core-truth"
+  ]
 }

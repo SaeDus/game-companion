@@ -35,8 +35,6 @@ public class GameFormatter
                 CharsiImbueCount = 2,
                 LarzukSocketCount = 2,
             },
-
-            Chronicle = ChronicleFormatter.BuildChronicleState(stash),
         };
 
         return gameState;

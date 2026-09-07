@@ -1,0 +1,24 @@
+{
+  "SchemaVersion": 1,
+  "Id": "journey",
+  "Title": "The Journey",
+  "Subtitle": "Tactical History",
+  "Sections": [
+    {
+      "Id": "tactical-findings",
+      "Title": "Tactical Findings",
+      "Entries": [
+        {
+          "Id": "current-boss-doctrine",
+          "Title": "Current Boss Doctrine",
+          "Content": []
+        },
+        {
+          "Id": "current-skill-doctrine",
+          "Title": "Current Skill Doctrine",
+          "Content": []
+        }
+      ]
+    }
+  ]
+}

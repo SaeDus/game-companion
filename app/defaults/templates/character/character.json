@@ -1,3 +1,13 @@
 {
-  "SchemaVersion": 1
+  "SchemaVersion": 1,
+  "Id": "",
+  "GameId": "",
+  "CompanionId": "",
+  "Includes": [
+    "runtime-instructions",
+    "custom-instructions",
+    "preferences-truth",
+    "custom-truth",
+    "journey"
+  ]
 }

@@ -12,6 +12,4 @@ public sealed class GameState
 
     public QuestLogState QuestLog { get; set; } = new();
     public ControlledResourcesState ControlledResources { get; set; } = new();
-
-    public ChronicleState Chronicle { get; set; } = new();
 }

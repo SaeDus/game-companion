@@ -1,0 +1,25 @@
+{
+  "SchemaVersion": 1,
+  "Id": "diary",
+  "Title": "Diary",
+  "Subtitle": "Player Run History",
+  "Sections": [
+    {
+      "Id": "difficulty",
+      "Title": "Difficulty",
+      "Entries": [
+        {
+          "Id": "act",
+          "Title": "Act",
+          "Entries": [
+            {
+              "Id": "title",
+              "Title": "Title",
+              "Content": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
