@@ -100,7 +100,7 @@
           "Id": "tracked-state-refresh",
           "Title": "Tracked-State Refresh",
           "Content": [
-            "When an executed action changes tracked in-game state, save and refresh Game Companion as needed so fresh adapter state and the next game-companion.json can capture the result. Never manually edit generated adapter state to simulate an in-game change."
+            "When an executed action changes tracked in-game state and later decisions depend on the result, save and refresh the tracked state before further evaluation."
           ]
         }
       ]
