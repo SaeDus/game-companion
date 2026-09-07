@@ -70,7 +70,7 @@
           "Id": "comparison-scope",
           "Title": "Comparison Scope",
           "Content": [
-            "Exclude gems when the task defines them outside loot results, and exclude character level, attributes, skills, experience, and other non-loot state from the farming result. The comparison is a net retained-state record, not a complete event log; transient drops sold or discarded before the final export cannot be reconstructed unless another tracked state explicitly preserves them."
+            "Exclude gems, character level, attributes, skills, experience, and other non-loot state from the farming result. The comparison is a net retained-state record, not a complete event log; transient magic, rare, or other drops sold or discarded before the final export cannot be reconstructed unless another tracked state explicitly preserves them."
           ]
         }
       ]
@@ -130,7 +130,7 @@
           "Id": "mule-storage",
           "Title": "Mule Storage",
           "Content": [
-            "For Diablo II, mule characters may be used for additional storage when Preferences Truth's option-preservation policy makes that worthwhile. Mule storage does not change item ownership, strategic authority, or disposal rules."
+            "For Diablo II, mule characters may be used for additional storage when preserving meaningful equipment or strategic options makes that worthwhile. Mule storage does not change item ownership, strategic authority, or disposal rules."
           ]
         }
       ]
@@ -143,7 +143,7 @@
           "Id": "strategic-material-preservation",
           "Title": "Strategic Material Preservation",
           "Content": [
-            "Hoarded gems, jewels, runes, bases, and comparable materials are Diablo II strategic resources rather than free-use supplies. Preserve them until they are explicitly committed under the strategic-control policy in Preferences Truth."
+            "Hoarded gems, jewels, runes, bases, and comparable materials are Diablo II strategic resources rather than free-use supplies. Preserve them until an explicit run decision commits or releases them."
           ]
         },
         {
