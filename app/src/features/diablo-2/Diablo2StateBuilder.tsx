@@ -15,12 +15,10 @@ import {
   AlertTriangle,
 } from "lucide-react";
 
-import type { Metadata } from "./Metadata";
-import type { GameData } from "./GameData";
+import type { Metadata } from "../Metadata";
+import type { GameData } from "../GameData";
 
-import "../../App.css";
-
-function GameStateBuilder() {
+function Diablo2StateBuilder() {
   const [characterPath, setCharacterPath] = useState<string | null>(null);
   const [stashPath, setStashPath] = useState<string | null>(null);
 
@@ -686,4 +684,4 @@ function getCharacterPreview(
   };
 }
 
-export default GameStateBuilder;
+export default Diablo2StateBuilder;

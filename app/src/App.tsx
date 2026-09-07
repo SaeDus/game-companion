@@ -1,4 +1,4 @@
-import GameStateBuilder from "./features/GameState/GameStateBuilder";
+import GameStateBuilder from "./features/GameStateBuilder";
 
 import "./App.css";
 
