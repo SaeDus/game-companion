@@ -10,6 +10,15 @@ public static class QuestLogFormatter
         DifficultyState hell = BuildDifficultyState(save.Quests.Hell);
 
         if (
+            normal.DifficultyStatus is "NotStarted"
+            && nightmare.DifficultyStatus is "NotStarted"
+            && hell.DifficultyStatus is "NotStarted"
+        )
+        {
+            return new() { QuestLogStatus = "NotStarted" };
+        }
+
+        if (
             normal.DifficultyStatus is "Completed"
             && nightmare.DifficultyStatus is "Completed"
             && hell.DifficultyStatus is "Completed"
@@ -30,31 +39,16 @@ public static class QuestLogFormatter
 
     private static DifficultyState BuildDifficultyState(QuestsDifficulty difficulty)
     {
-        ActState actI = BuildActIState(difficulty.ActI);
-        ActState actII = BuildActIIState(difficulty.ActII);
-        ActState actIII = BuildActIIIState(difficulty.ActIII);
-        ActState actIV = BuildActIVState(difficulty.ActIV);
-        ActState actV = BuildActVState(difficulty.ActV);
-
-        if (
-            actI.Status is "Completed"
-            && actII.Status is "Completed"
-            && actIII.Status is "Completed"
-            && actIV.Status is "Completed"
-            && actV.Status is "Completed"
-        )
-        {
-            return new() { DifficultyStatus = "Completed" };
-        }
-
         DifficultyState difficultyState = new()
         {
-            ActI = actI,
-            ActII = actII,
-            ActIII = actIII,
-            ActIV = actIV,
-            ActV = actV,
+            ActI = BuildActIState(difficulty.ActI),
+            ActII = BuildActIIState(difficulty.ActII),
+            ActIII = BuildActIIIState(difficulty.ActIII),
+            ActIV = BuildActIVState(difficulty.ActIV),
+            ActV = BuildActVState(difficulty.ActV),
         };
+
+        CheckDifficultyStatus(difficultyState);
 
         return difficultyState;
     }
@@ -131,7 +125,7 @@ public static class QuestLogFormatter
             }
         );
 
-        return actIState;
+        return HasActBeenStarted(actIState.Quests) ? actIState : new() { Status = "NotStarted" };
     }
 
     private static ActState BuildActIIState(ActIIQuests quests)
@@ -206,7 +200,7 @@ public static class QuestLogFormatter
             }
         );
 
-        return actIIState;
+        return HasActBeenStarted(actIIState.Quests) ? actIIState : new() { Status = "NotStarted" };
     }
 
     private static ActState BuildActIIIState(ActIIIQuests quests)
@@ -281,7 +275,9 @@ public static class QuestLogFormatter
             }
         );
 
-        return actIIIState;
+        return HasActBeenStarted(actIIIState.Quests)
+            ? actIIIState
+            : new() { Status = "NotStarted" };
     }
 
     private static ActState BuildActIVState(ActIVQuests quests)
@@ -326,7 +322,7 @@ public static class QuestLogFormatter
             }
         );
 
-        return actIVState;
+        return HasActBeenStarted(actIVState.Quests) ? actIVState : new() { Status = "NotStarted" };
     }
 
     private static ActState BuildActVState(ActVQuests quests)
@@ -401,7 +397,7 @@ public static class QuestLogFormatter
             }
         );
 
-        return actVState;
+        return HasActBeenStarted(actVState.Quests) ? actVState : new() { Status = "NotStarted" };
     }
 
     private static string GetQuestState(QuestFlags flags)
@@ -419,5 +415,46 @@ public static class QuestLogFormatter
             return "Completed";
 
         return "InProgress";
+    }
+
+    private static bool HasActBeenStarted(List<QuestState> quests)
+    {
+        foreach (var quest in quests)
+        {
+            if (quest.Status != "NotStarted")
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static void CheckDifficultyStatus(DifficultyState difficulty)
+    {
+        ActState?[] acts =
+        [
+            difficulty.ActI,
+            difficulty.ActII,
+            difficulty.ActIII,
+            difficulty.ActIV,
+            difficulty.ActV,
+        ];
+
+        string? status = acts[0]?.Status;
+
+        if (status is not ("Completed" or "NotStarted"))
+            return;
+
+        if (!acts.All(act => act?.Status == status))
+            return;
+
+        difficulty.DifficultyStatus = status;
+
+        difficulty.ActI = null;
+        difficulty.ActII = null;
+        difficulty.ActIII = null;
+        difficulty.ActIV = null;
+        difficulty.ActV = null;
     }
 }
