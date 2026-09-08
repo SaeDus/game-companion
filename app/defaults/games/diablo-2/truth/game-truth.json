@@ -25,9 +25,9 @@
           "Id": "quest-resource-and-mercenary-semantics",
           "Title": "Quest, Resource & Mercenary Semantics",
           "Content": [
-            "For QuestLog entries, State is the semantic progression field used for planning: NotStarted means the quest has not begun, InProgress means it is underway, and Completed means its quest objective is complete. Status preserves underlying quest-flag data as supporting raw information and should not override State unless the export is known to be wrong or incomplete.",
-            "IsOptional is strategic context. An unfinished optional quest is an available choice rather than an obligation, while a non-optional quest may constrain progression without automatically becoming the next objective.",
-            "ControlledResources is authoritative for tracked one-time Diablo II services and rewards such as Akara respecs, Charsi imbues, and Larzuk socketing. Do not reconstruct those counts from quest flags or duplicate them manually in Runtime Instructions. Exported mercenary identity, status, stats, skills, and equipment are likewise authoritative and should not be duplicated in manual mercenary-state sections."
+            "QuestLog may collapse uniform progression branches. A DifficultyStatus or ActStatus of Completed means every quest beneath that difficulty or act is completed; NotStarted means every quest beneath it is not started. Children omitted by a collapsed branch are intentionally summarized rather than missing. A branch with mixed progression expands until the differing individual quests are represented.",
+            "For individual quest entries, Status is the semantic progression field used for planning: NotStarted means the quest has not begun, InProgress means it is underway, and Completed means its quest objective is complete. Name identifies the quest, and IsOptional is strategic context: an unfinished optional quest is an available choice rather than an obligation, while a non-optional quest may constrain progression without automatically becoming the next objective.",
+            "ControlledResources is authoritative for tracked one-time Diablo II services and rewards such as Akara respecs, Charsi imbues, and Larzuk socketing. Do not reconstruct those counts from quest state or duplicate them manually in Runtime Instructions. Exported mercenary identity, status, stats, skills, and equipment are likewise authoritative and should not be duplicated in manual mercenary-state sections."
           ]
         },
         {
