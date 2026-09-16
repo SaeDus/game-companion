@@ -1,11 +1,11 @@
-export interface ObjectiveRule {
-    Id: string;
-    Title: string;
-    Content: string[];
+export interface InstructionSection {
+  Id: string;
+  Title: string;
+  Rules: InstructionRule[];
 }
 
-export interface Objective {
-    Id: string;
-    Title: string;
-    Rules: ObjectiveRule[];
+export interface InstructionRule {
+  Id: string;
+  Title: string;
+  Content: string[];
 }
