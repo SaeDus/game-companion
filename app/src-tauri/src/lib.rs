@@ -115,6 +115,27 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
+fn get_runtime_instructions(
+    app: tauri::AppHandle,
+    character_id: String
+) -> Result<String, String> {
+    let app_data = app
+        .path()
+        .local_data_dir()
+        .map_err(|error| error.to_string())?
+        .join("game-companion");
+
+    let runtime_text = app_data
+        .join("characters")
+        .join(&character_id)
+        .join("player")
+        .join("runtime-instructions.json");
+
+    std::fs::read_to_string(runtime_text)
+        .map_err(|error| error.to_string())
+}
+
+#[tauri::command]
 fn build_game_companion(
     app: tauri::AppHandle,
     character_id: String,
@@ -248,6 +269,7 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             greet,
+            get_runtime_instructions,
             build_game_companion
         ])
         .run(tauri::generate_context!())
