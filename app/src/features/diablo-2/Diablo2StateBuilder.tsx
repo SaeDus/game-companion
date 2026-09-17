@@ -6,14 +6,14 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import Diablo2Main from "./Diablo2Main";
+import Diablo2Home from "./Diablo2Home";
 import Diablo2Exporter from "./Diablo2Exporter";
 
 import "./styles/Diablo2.css";
-import "./styles/Diablo2Main.css";
 import "./styles/Diablo2StateBuilder.css";
+import "./styles/Diablo2Exporter.css";
 
-type Diablo2PageId = "main" | "exporter";
+type Diablo2PageId = "home" | "exporter";
 
 type Diablo2NavigationItem = {
   Id: Diablo2PageId;
@@ -23,7 +23,7 @@ type Diablo2NavigationItem = {
 
 const navigationItems: Diablo2NavigationItem[] = [
   {
-    Id: "main",
+    Id: "home",
     Label: "Command Hub",
     Icon: LayoutDashboard,
   },
@@ -35,7 +35,7 @@ const navigationItems: Diablo2NavigationItem[] = [
 ];
 
 function Diablo2StateBuilder() {
-  const [activePage, setActivePage] = useState<Diablo2PageId>("main");
+  const [activePage, setActivePage] = useState<Diablo2PageId>("home");
   const [navigationExpanded, setNavigationExpanded] = useState(false);
 
   function renderActivePage() {
@@ -43,9 +43,9 @@ function Diablo2StateBuilder() {
       case "exporter":
         return <Diablo2Exporter />;
 
-      case "main":
+      case "home":
       default:
-        return <Diablo2Main />;
+        return <Diablo2Home />;
     }
   }
 
