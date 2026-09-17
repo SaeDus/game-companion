@@ -3,13 +3,11 @@ import { useEffect, useState } from "react";
 import { InstructionSection, RunewordSection } from "./types/RuntimeInstructions.ts";
 
 function Diablo2Main() {
-  const [runtimeInstructions, setRuntimeInstructions] = useState("");
   const [instructionObjective, setInstructionObjective] = useState<InstructionSection | null>(null);
   const [instructionStopConditions, setInstructionStopConditions] = useState<InstructionSection | null>(null);
   const [instructionItemTracking, setInstructionItemTracking] = useState<InstructionSection | null>(null);
   const [instructionRunewordWatchlist, setInstructionRunewordWatchlist] = useState<RunewordSection | null>(null);
 
-  // Objective
   const objectiveTask =
     instructionObjective?.Rules.find(
       (rule) => rule.Id === "current-task"
@@ -35,7 +33,28 @@ function Diablo2Main() {
           }
         );
 
-        setRuntimeInstructions(result);
+        const parsed = JSON.parse(result);
+
+        const objectiveData = parsed.Sections?.find(
+          (section: any) => section.Id === "objectives"
+        );
+
+        const stopConditionData = parsed.Sections?.find(
+          (section: any) => section.Id === "permanent-stopping-conditions"
+        );
+
+        const itemTrackingData = parsed.Sections?.find(
+          (section: any) => section.Id === "manual-item-tracking"
+        );
+
+        const runewordWatchlistData = parsed.Sections?.find(
+          (section: any) => section.Id === "runeword-base-watchlist"
+        );
+
+        setInstructionObjective(objectiveData ?? null);
+        setInstructionStopConditions(stopConditionData ?? null);
+        setInstructionItemTracking(itemTrackingData ?? null);
+        setInstructionRunewordWatchlist(runewordWatchlistData ?? null);
       } catch (error) {
         console.error(error);
       }
@@ -43,39 +62,6 @@ function Diablo2Main() {
 
     initializeRuntimeInstructions();
   }, []);
-
-  useEffect(() => {
-    if (!runtimeInstructions) {
-      return;
-    }
-
-    try {
-      const parsed = JSON.parse(runtimeInstructions);
-
-      const objectiveData = parsed.Sections?.find(
-        (section: any) => section.Id === "objectives"
-      );
-
-      const stopConditionData = parsed.Sections?.find(
-        (section: any) => section.Id === "permanent-stopping-conditions"
-      );
-
-      const itemTrackingData = parsed.Sections?.find(
-        (section: any) => section.Id === "manual-item-tracking"
-      );
-
-      const runewordWatchlistData = parsed.Sections?.find(
-        (section: any) => section.Id === "runeword-base-watchlist"
-      );
-
-      setInstructionObjective(objectiveData ?? null);
-      setInstructionStopConditions(stopConditionData ?? null);
-      setInstructionItemTracking(itemTrackingData ?? null);
-      setInstructionRunewordWatchlist(runewordWatchlistData ?? null);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [runtimeInstructions]);
 
   return (
     <>
@@ -189,18 +175,18 @@ function RunewordWatchlistPanel({ watchlist }: { watchlist: RunewordSection | nu
             <h3>{runeword.Name}</h3>
 
             <ul>
-              {runeword.Runes.map((runes) => (
-                <li>{runes}</li>
+              {runeword.Runes.map((runes, index) => (
+                <li key={index}>{runes}</li>
               ))}
             </ul>
             <ul>
-              {runeword.BaseItems.map((baseItems) => (
-                <li>{baseItems}</li>
+              {runeword.BaseItems.map((baseItems, index) => (
+                <li key={index}>{baseItems}</li>
               ))}
             </ul>
             <ul>
-              {runeword.Notes.map((notes) => (
-                <li>{notes}</li>
+              {runeword.Notes.map((notes, index) => (
+                <li key={index}>{notes}</li>
               ))}
             </ul>
           </li>

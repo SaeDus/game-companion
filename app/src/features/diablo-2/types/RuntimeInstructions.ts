@@ -21,5 +21,5 @@ export interface RunewordItem {
   Name: string;
   Runes: string[];
   BaseItems: string[];
-  Notes: string[]
+  Notes: string[];
 }
