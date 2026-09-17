@@ -19,8 +19,6 @@ import {
 import type { Metadata } from "../Metadata";
 import type { GameData } from "../GameData";
 
-import "./styles/Diablo2Exporter.css";
-
 function Diablo2Exporter() {
   const [characterPath, setCharacterPath] = useState<string | null>(null);
   const [stashPath, setStashPath] = useState<string | null>(null);
@@ -170,6 +168,16 @@ function Diablo2Exporter() {
         stashPath,
       ]).execute();
 
+      // const result = await Command.create("d2-exporter", [
+      //   "run",
+      //   "--project",
+      //   "../../exporters/diablo-2/d2-reader.csproj",
+      //   "--",
+      //   "initialize",
+      //   "<path_to_source_files>",
+      //   "<path_to_data_directory>",
+      // ]).execute();
+
       if (result.stderr.trim()) {
         setExporterMessages(result.stderr);
       }
@@ -225,14 +233,18 @@ function Diablo2Exporter() {
         );
       }
 
+
+      // Build the new object.
       const gameState = {
         metadata: metadata,
         game: game,
         ...finalState,
       };
 
+      // Convert the completed object back into JSON text.
       const json = JSON.stringify(gameState, null, 2);
 
+      // Ask where the new file should be created.
       const outputPath = await save({
         title: "Save Diablo II Game Companion",
         defaultPath: "game-companion.json",
@@ -273,6 +285,8 @@ function Diablo2Exporter() {
       <div className="app-grid pointer-events-none fixed inset-0 opacity-40" />
 
       <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 py-8 lg:px-10 lg:py-10">
+
+        {/* Header */}
         <header className="mb-8 flex flex-col gap-5 border-b border-white/8 pb-7 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="mb-3 flex items-center gap-2">
@@ -327,8 +341,13 @@ function Diablo2Exporter() {
           </div>
         </header>
 
+        {/* Main workspace */}
         <div className="grid flex-1 gap-6 xl:grid-cols-[1fr_340px]">
+
+          {/* Left column */}
           <section className="space-y-6">
+
+            {/* Input configuration */}
             <div className="glass-panel rounded-2xl border border-white/8 bg-zinc-950/65 p-6 backdrop-blur-xl">
               <div className="mb-6 flex items-center justify-between">
                 <div>
@@ -347,6 +366,8 @@ function Diablo2Exporter() {
               </div>
 
               <div className="space-y-4">
+
+                {/* Character save */}
                 <div className="group rounded-xl border border-white/8 bg-white/[0.025] p-4 transition hover:border-amber-400/20 hover:bg-white/[0.04]">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-amber-400/15 bg-amber-400/8 text-amber-300">
@@ -384,11 +405,13 @@ function Diablo2Exporter() {
                       className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.045] px-4 py-2.5 text-sm font-medium text-zinc-300 transition hover:border-amber-400/25 hover:bg-amber-400/10 hover:text-amber-200 active:scale-[0.98]"
                     >
                       <FolderOpen className="h-4 w-4" />
+
                       {characterPath ? "Change" : "Select"}
                     </button>
                   </div>
                 </div>
 
+                {/* Stash */}
                 <div className="group rounded-xl border border-white/8 bg-white/[0.025] p-4 transition hover:border-amber-400/20 hover:bg-white/[0.04]">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-violet-400/15 bg-violet-400/8 text-violet-300">
@@ -426,6 +449,7 @@ function Diablo2Exporter() {
                       className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.045] px-4 py-2.5 text-sm font-medium text-zinc-300 transition hover:border-violet-400/25 hover:bg-violet-400/10 hover:text-violet-200 active:scale-[0.98]"
                     >
                       <FolderOpen className="h-4 w-4" />
+
                       {stashPath ? "Change" : "Select"}
                     </button>
                   </div>
@@ -433,6 +457,7 @@ function Diablo2Exporter() {
               </div>
             </div>
 
+            {/* Generate */}
             <div className="relative overflow-hidden rounded-2xl border border-amber-400/15 bg-gradient-to-br from-amber-400/[0.08] via-zinc-950/80 to-zinc-950/80 p-6">
               <div className="absolute -right-16 -top-24 h-64 w-64 rounded-full bg-amber-500/8 blur-3xl" />
 
@@ -478,6 +503,7 @@ function Diablo2Exporter() {
               </div>
             </div>
 
+            {/* Diagnostics */}
             <div className="glass-panel overflow-hidden rounded-2xl border border-white/8 bg-zinc-950/65 backdrop-blur-xl">
               <div className="flex items-center justify-between border-b border-white/8 px-5 py-4">
                 <div className="flex items-center gap-3">
@@ -511,7 +537,10 @@ function Diablo2Exporter() {
             </div>
           </section>
 
+          {/* Right sidebar */}
           <aside className="space-y-6">
+
+            {/* Character snapshot */}
             <div className="glass-panel rounded-2xl border border-white/8 bg-zinc-950/65 p-6 backdrop-blur-xl">
               <div className="mb-5 flex items-center justify-between">
                 <div>
@@ -572,6 +601,7 @@ function Diablo2Exporter() {
               )}
             </div>
 
+            {/* Status */}
             <div className="glass-panel rounded-2xl border border-white/8 bg-zinc-950/65 p-6 backdrop-blur-xl">
               <p className="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500">
                 System Status
@@ -592,9 +622,18 @@ function Diablo2Exporter() {
 
                   <div className="min-w-0">
                     <p
-                      className={`text-sm leading-6 ${error
+                      className={`text-sm font-medium ${error
                         ? "text-red-300"
-                        : "text-zinc-400"
+                        : "text-zinc-300"
+                        }`}
+                    >
+                      {error ? "Action required" : "Game Companion"}
+                    </p>
+
+                    <p
+                      className={`mt-1 break-words text-xs leading-5 ${error
+                        ? "text-red-300/70"
+                        : "text-zinc-500"
                         }`}
                     >
                       {error || statusMessage}
@@ -603,8 +642,33 @@ function Diablo2Exporter() {
                 </div>
               </div>
             </div>
+
+            {/* Package info */}
+            <div className="rounded-2xl border border-white/6 bg-white/[0.02] p-5">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-700">
+                Output Package
+              </p>
+
+              <div className="mt-3 flex items-center gap-3">
+                <Database className="h-4 w-4 text-amber-500/70" />
+
+                <div>
+                  <p className="font-mono text-xs text-zinc-400">
+                    game-state.json
+                  </p>
+
+                  <p className="mt-1 text-[11px] text-zinc-700">
+                    Schema version {metadata.Version}
+                  </p>
+                </div>
+              </div>
+            </div>
           </aside>
         </div>
+
+        <footer className="mt-8 border-t border-white/5 pt-5 text-center font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-800">
+          Game Companion / Local State Generation
+        </footer>
       </div>
     </main>
   );
@@ -612,38 +676,33 @@ function Diablo2Exporter() {
 
 function getCharacterPreview(
   characterState: Record<string, unknown>
-): {
-  name: string;
-  className: string;
-  level: number | null;
-} | null {
-  const content = characterState.Content;
+) {
+  const character = characterState.Character;
 
-  if (!content || typeof content !== "object") {
+  if (
+    !character ||
+    typeof character !== "object" ||
+    Array.isArray(character)
+  ) {
     return null;
   }
 
-  const contentRecord = content as Record<string, unknown>;
-  const character = contentRecord.Character;
-
-  if (!character || typeof character !== "object") {
-    return null;
-  }
-
-  const characterRecord = character as Record<string, unknown>;
+  const data = character as Record<string, unknown>;
 
   return {
     name:
-      typeof characterRecord.Name === "string"
-        ? characterRecord.Name
-        : "Unknown",
+      typeof data.Name === "string"
+        ? data.Name
+        : "Unknown Character",
+
     className:
-      typeof characterRecord.Class === "string"
-        ? characterRecord.Class
-        : "Unknown",
+      typeof data.Class === "string"
+        ? data.Class
+        : "Unknown Class",
+
     level:
-      typeof characterRecord.Level === "number"
-        ? characterRecord.Level
+      typeof data.Level === "number"
+        ? data.Level
         : null,
   };
 }
