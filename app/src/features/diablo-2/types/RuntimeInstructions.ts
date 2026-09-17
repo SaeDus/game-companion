@@ -9,3 +9,17 @@ export interface InstructionRule {
   Title: string;
   Content: string[];
 }
+
+export interface RunewordSection {
+  Id: string;
+  Title: string;
+  Runewords: RunewordItem[];
+}
+
+export interface RunewordItem {
+  Id: string;
+  Name: string;
+  Runes: string[];
+  BaseItems: string[];
+  Notes: string[]
+}

@@ -28,27 +28,37 @@
     {
       "Id": "permanent-stopping-conditions",
       "Title": "Permanent Stopping Conditions",
-      "Rules": []
-    },
-    {
-      "Id": "loot-review-queue",
-      "Title": "Loot Review Queue",
-      "Rules": []
-    },
-    {
-      "Id": "quick-instruction-queue",
-      "Title": "Quick Instruction Queue",
-      "Rules": []
+      "Rules": [
+        {
+          "Id": "default-condition-schema",
+          "Title": "",
+          "Content": []
+        }
+      ]
     },
     {
       "Id": "manual-item-tracking",
       "Title": "Manual Item Tracking",
-      "Rules": []
+      "Rules": [
+        {
+          "Id": "default-item-schema",
+          "Title": "",
+          "Content": []
+        }
+      ]
     },
     {
       "Id": "runeword-base-watchlist",
       "Title": "Runeword Base Watchlist",
-      "Rules": []
+      "Runewords": [
+        {
+          "Id": "default-runeword-schema",
+          "Name": "",
+          "Runes": [],
+          "BaseItems": [],
+          "Notes": []
+        }
+      ]
     }
   ]
 }

@@ -1,13 +1,13 @@
 import { invoke } from "@tauri-apps/api/core";
 import { useEffect, useState } from "react";
-import { InstructionSection } from "./types/RuntimeInstructions.ts";
+import { InstructionSection, RunewordSection } from "./types/RuntimeInstructions.ts";
 
 function Diablo2Main() {
   const [runtimeInstructions, setRuntimeInstructions] = useState("");
   const [instructionObjective, setInstructionObjective] = useState<InstructionSection | null>(null);
   const [instructionStopConditions, setInstructionStopConditions] = useState<InstructionSection | null>(null);
   const [instructionItemTracking, setInstructionItemTracking] = useState<InstructionSection | null>(null);
-  const [instructionRunewordWatchlist, setInstructionRunewordWatchlist] = useState<InstructionSection | null>(null);
+  const [instructionRunewordWatchlist, setInstructionRunewordWatchlist] = useState<RunewordSection | null>(null);
 
   // Objective
   const objectiveTask =
@@ -175,7 +175,7 @@ function ItemTrackingPanel({ items }: { items: InstructionSection | null }) {
   );
 }
 
-function RunewordWatchlistPanel({ watchlist }: { watchlist: InstructionSection | null }) {
+function RunewordWatchlistPanel({ watchlist }: { watchlist: RunewordSection | null }) {
   if (!watchlist) {
     return <p>No Runewords in Watchlist...</p>
   }
@@ -184,13 +184,23 @@ function RunewordWatchlistPanel({ watchlist }: { watchlist: InstructionSection |
     <section className="runeword-watchlist-panel">
       <h2>Runeword Watchlist</h2>
       <ul>
-        {watchlist.Rules.map((rule) => (
-          <li key={rule.Id}>
-            <h3>{rule.Title}</h3>
+        {watchlist.Runewords.map((runeword) => (
+          <li key={runeword.Id}>
+            <h3>{runeword.Name}</h3>
 
             <ul>
-              {rule.Content.map((ruleText, index) => (
-                <li key={index}>{ruleText}</li>
+              {runeword.Runes.map((runes) => (
+                <li>{runes}</li>
+              ))}
+            </ul>
+            <ul>
+              {runeword.BaseItems.map((baseItems) => (
+                <li>{baseItems}</li>
+              ))}
+            </ul>
+            <ul>
+              {runeword.Notes.map((notes) => (
+                <li>{notes}</li>
               ))}
             </ul>
           </li>
