@@ -1,0 +1,66 @@
+/* Diablo II State Exporter */
+
+.diablo2-theme .app-shell {
+  position: relative;
+  min-height: 100vh;
+  color: var(--d2-text);
+  background:
+    radial-gradient(circle at 18% -10%, rgba(245, 158, 11, 0.08), transparent 30%),
+    radial-gradient(circle at 90% 12%, rgba(124, 58, 237, 0.06), transparent 25%),
+    var(--d2-bg);
+}
+
+.diablo2-theme .app-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0.55) 55%, transparent);
+}
+
+.diablo2-theme .glass-panel {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.025) inset,
+    0 18px 60px rgba(0, 0, 0, 0.18);
+}
+
+.diablo2-theme .diagnostic-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #3f3f46 transparent;
+}
+
+.diablo2-theme .diagnostic-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.diablo2-theme .diagnostic-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.diablo2-theme .diagnostic-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #27272a;
+}
+
+.diablo2-theme .diagnostic-scroll::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+.diablo2-theme .generate-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.diablo2-theme .generate-button::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.28) 45%, transparent 70%);
+  transform: translateX(-140%);
+  transition: transform 500ms ease;
+}
+
+.diablo2-theme .generate-button:not(:disabled):hover::after {
+  transform: translateX(140%);
+}
