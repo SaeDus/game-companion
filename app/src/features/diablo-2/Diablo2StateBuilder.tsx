@@ -4,7 +4,11 @@ import Diablo2Exporter from "./Diablo2Exporter";
 import "./styles/Diablo2.css";
 
 function Diablo2StateBuilder() {
-  return <Diablo2Main />
+  return (
+    <div className="diablo2-theme">
+      <Diablo2Main />
+    </div>
+  );
 }
 
 export default Diablo2StateBuilder;

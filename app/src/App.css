@@ -12,6 +12,21 @@
 
   color-scheme: dark;
 
+  --app-bg: #0b0f17;
+  --app-bg-elevated: #101722;
+  --app-surface: #141c29;
+  --app-surface-hover: #192435;
+  --app-border: rgba(148, 163, 184, 0.16);
+  --app-border-strong: rgba(148, 163, 184, 0.28);
+  --app-text: #e5e7eb;
+  --app-muted: #94a3b8;
+  --app-accent: #60a5fa;
+  --app-accent-soft: rgba(96, 165, 250, 0.12);
+  --app-danger: #f87171;
+
+  color: var(--app-text);
+  background: var(--app-bg);
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -32,130 +47,121 @@ body,
 
 body {
   overflow-x: hidden;
-  background: #070708;
+  color: var(--app-text);
+  line-height: 1.5;
+  background:
+    radial-gradient(
+      circle at 12% -10%,
+      rgba(59, 130, 246, 0.09),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 92% 8%,
+      rgba(99, 102, 241, 0.055),
+      transparent 28%
+    ),
+    var(--app-bg);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  border: 1px solid var(--app-border);
+  border-radius: 0.75rem;
+  background: var(--app-bg-elevated);
 }
 
 button {
-  font: inherit;
+  cursor: pointer;
+  padding: 0.625rem 0.875rem;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--app-border-strong);
+  background: var(--app-surface-hover);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+}
+
+textarea {
+  min-height: 6rem;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+::placeholder {
+  color: var(--app-muted);
+  opacity: 0.7;
+}
+
+a {
+  color: var(--app-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+:focus-visible {
+  outline: 2px solid var(--app-accent);
+  outline-offset: 2px;
 }
 
 ::selection {
-  background: rgba(251, 191, 36, 0.25);
   color: white;
+  background: var(--app-accent-soft);
 }
 
 /*
-  Main background.
-
-  There are two extremely subtle radial lights here,
-  which stop the background from looking like a flat
-  black rectangle.
+  Shared fallback surfaces for pages and features that do not provide
+  their own visual treatment.
 */
 .app-shell {
-  position: relative;
-
-  background:
-    radial-gradient(
-      circle at 18% -10%,
-      rgba(245, 158, 11, 0.08),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 90% 12%,
-      rgba(124, 58, 237, 0.06),
-      transparent 25%
-    ),
-    #070708;
+  min-height: 100vh;
+  color: var(--app-text);
+  background: var(--app-bg);
 }
 
-/*
-  Barely-visible technical grid.
-*/
-.app-grid {
-  background-image:
-    linear-gradient(
-      rgba(255, 255, 255, 0.018) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.018) 1px,
-      transparent 1px
-    );
-
-  background-size: 34px 34px;
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      black,
-      rgba(0, 0, 0, 0.55) 55%,
-      transparent
-    );
-}
-
-/*
-  Keeps cards from looking completely flat without
-  introducing giant neon shadows everywhere.
-*/
-.glass-panel {
+.app-panel {
+  border: 1px solid var(--app-border);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--app-surface) 88%, transparent);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.025) inset,
-    0 18px 60px rgba(0, 0, 0, 0.18);
+    0 18px 60px rgba(0, 0, 0, 0.16);
 }
 
-/*
-  Exporter console scrollbar.
-*/
-.diagnostic-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: #3f3f46 transparent;
-}
-
-.diagnostic-scroll::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-.diagnostic-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.diagnostic-scroll::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 999px;
-}
-
-.diagnostic-scroll::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
-}
-
-/*
-  Slight sheen when hovering over the primary action.
-*/
-.generate-button {
-  position: relative;
-  overflow: hidden;
-}
-
-.generate-button::after {
-  position: absolute;
-  inset: 0;
-
-  content: "";
-
-  background:
-    linear-gradient(
-      110deg,
-      transparent 20%,
-      rgba(255, 255, 255, 0.28) 45%,
-      transparent 70%
-    );
-
-  transform: translateX(-140%);
-  transition: transform 500ms ease;
-}
-
-.generate-button:not(:disabled):hover::after {
-  transform: translateX(140%);
+.app-card {
+  border: 1px solid var(--app-border);
+  border-radius: 0.75rem;
+  background: var(--app-bg-elevated);
 }
