@@ -17,9 +17,9 @@ import {
   RunewordSection,
 } from "./types/RuntimeInstructions.ts";
 
-import "./styles/Diablo2Home.css";
+import "./styles/Diablo2Directive.css";
 
-function Diablo2Home() {
+function Diablo2Directive() {
   const [instructionObjective, setInstructionObjective] =
     useState<InstructionSection | null>(null);
   const [instructionStopConditions, setInstructionStopConditions] =
@@ -126,9 +126,8 @@ function Diablo2Home() {
 
           <div className="d2-command-summary">
             <div
-              className={`d2-runtime-status ${
-                loadError ? "is-error" : isLoading ? "is-loading" : "is-ready"
-              }`}
+              className={`d2-runtime-status ${loadError ? "is-error" : isLoading ? "is-loading" : "is-ready"
+                }`}
             >
               <span aria-hidden="true" />
               {runtimeStatus}
@@ -451,4 +450,4 @@ function EmptyMessage({ message }: { message: string }) {
   return <p className="d2-empty-message">{message}</p>;
 }
 
-export default Diablo2Home;
+export default Diablo2Directive;
