@@ -3,11 +3,26 @@ import { open } from "@tauri-apps/plugin-dialog";
 import { Command } from "@tauri-apps/plugin-shell";
 import { localDataDir, join } from "@tauri-apps/api/path";
 
+interface InitializationResult {
+  success: boolean;
+  error: string | null;
+  results: InitializationItemResult[];
+}
+
+interface InitializationItemResult {
+  name: string;
+  source: string;
+  success: boolean;
+  status: "current" | "generated" | null;
+  output: string | null;
+  error: string | null;
+}
+
 function Diablo2Initialization() {
   const [inputPath, setInputPath] = useState<string | null>(null);
 
   const [error, setError] = useState<string | null>(null);
-  const [statusMessage, setStatusMessage] = useState<string>("Data Status Pending...");
+  const [status, setStatus] = useState<InitializationResult | null>(null);
 
   async function selectInputPath() {
     try {
@@ -41,7 +56,7 @@ function Diablo2Initialization() {
 
     try {
       setError(null);
-      setStatusMessage("Reading .txt data files...");
+      setStatus(null);
 
       const dataPath = await join(
         await localDataDir(),
@@ -68,28 +83,8 @@ function Diablo2Initialization() {
         );
       }
 
-      if (!result.stdout.trim()) {
-        throw new Error(
-          "Diablo II exporter returned no state data"
-        );
-      }
-
-      let dataState: Record<string, unknown>;
-
-      try {
-        dataState = JSON.parse(result.stdout);
-      } catch {
-        console.error("Exporter stdout:", result.stdout);
-        console.error("Exporter stderr:", result.stderr);
-
-        throw new Error(
-          "Diablo II exporter returned invalid JSON"
-        );
-      }
-
-      const json = JSON.stringify(dataState, null, 2);
-
-      setStatusMessage(json);
+      let dataState: InitializationResult = JSON.parse(result.stdout);
+      setStatus(dataState);
     } catch (error) {
       console.error(error);
 
@@ -116,7 +111,18 @@ function Diablo2Initialization() {
       >
         Initialize Diablo II Data
       </button>
-      <pre>{statusMessage}</pre>
+      {status?.results.map((item) => (
+        <div key={item.name}>
+          <span>{item.source}</span>
+
+          {item.success ? (
+            <span>{item.status}</span>
+          ) : (
+            <span>{item.error}</span>
+          )}
+        </div>
+      ))}
+      <pre>{error}</pre>
     </>
   );
 }
