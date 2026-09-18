@@ -24,17 +24,18 @@ public class Program
 
     private static int InitializeReader(string[] args)
     {
-        if (args.Length != 3)
+        if (args.Length != 2)
         {
-            Console.Error.WriteLine("Usage: d2-reader initialize <input_dir> <output_dir>");
+            Console.Error.WriteLine("Usage: d2-reader initialize <input_dir>");
 
             return 2;
         }
 
         string sourceDir = args[1];
-        string outputDir = args[2];
 
-        GeneratorResult result = GenerateDataFiles(sourceDir, outputDir).GetAwaiter().GetResult();
+        GeneratorResult result = GenerateDataFiles(sourceDir, Data.GetDataDirectory())
+            .GetAwaiter()
+            .GetResult();
 
         Console.WriteLine(JsonSerializer.Serialize(result));
 

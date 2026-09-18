@@ -58,7 +58,7 @@ function Diablo2StateBuilder() {
         return <Diablo2Watchlist />;
 
       case "exporter":
-        return <Diablo2Exporter />;
+        return <Diablo2Initialization />;
 
       case "directive":
         return <Diablo2Directive />;

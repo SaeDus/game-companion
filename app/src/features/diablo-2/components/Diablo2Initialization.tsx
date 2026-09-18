@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { open } from "@tauri-apps/plugin-dialog";
 import { Command } from "@tauri-apps/plugin-shell";
-import { localDataDir, join } from "@tauri-apps/api/path";
 
 interface InitializationResult {
   success: boolean;
@@ -58,14 +57,6 @@ function Diablo2Initialization() {
       setError(null);
       setStatus(null);
 
-      const dataPath = await join(
-        await localDataDir(),
-        "game-companion",
-        "games",
-        "diablo-2",
-        "data"
-      );
-
       const result = await Command.create("d2-exporter", [
         "run",
         "--project",
@@ -73,7 +64,6 @@ function Diablo2Initialization() {
         "--",
         "initialize",
         inputPath,
-        dataPath,
       ]).execute();
 
       if (!result.stdout.trim()) {
