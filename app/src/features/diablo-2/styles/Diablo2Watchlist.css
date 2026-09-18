@@ -1,0 +1,228 @@
+/* -------------------------------------------------------------------------- */
+/* Diablo II Watchlist page                                                   */
+/* -------------------------------------------------------------------------- */
+
+.diablo2-theme .d2-watchlist-page {
+  background:
+    radial-gradient(circle at 10% -8%, rgba(124, 58, 237, 0.13), transparent 28rem),
+    radial-gradient(circle at 94% 4%, rgba(196, 137, 37, 0.12), transparent 28rem),
+    linear-gradient(180deg, #09090b 0%, var(--d2-bg-deep) 100%);
+}
+
+.diablo2-theme .d2-watchlist-page .d2-eyebrow {
+  color: #c4b5fd;
+}
+
+.diablo2-theme .d2-reference-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 1rem;
+}
+
+.diablo2-theme .d2-watch-panel {
+  min-height: 0;
+}
+
+/* Item tracking */
+
+.diablo2-theme .d2-item-panel {
+  border-color: rgba(167, 139, 250, 0.11);
+}
+
+.diablo2-theme .d2-item-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  padding: 0.85rem;
+}
+
+.diablo2-theme .d2-item-card {
+  border: 1px solid var(--d2-border);
+  border-radius: 0.9rem;
+  padding: 0.85rem;
+  background:
+    linear-gradient(145deg, rgba(167, 139, 250, 0.025), transparent 55%),
+    rgba(255, 255, 255, 0.018);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.diablo2-theme .d2-item-card:hover {
+  border-color: var(--d2-violet-border);
+  background-color: rgba(167, 139, 250, 0.025);
+  transform: translateY(-1px);
+}
+
+.diablo2-theme .d2-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
+}
+
+.diablo2-theme .d2-card-title-row svg {
+  flex: 0 0 auto;
+  color: var(--d2-violet);
+}
+
+.diablo2-theme .d2-card-title-row h3 {
+  margin: 0;
+  color: var(--d2-text-soft);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.diablo2-theme .d2-item-card .d2-copy-stack p {
+  color: #9b9ba5;
+  font-size: 0.79rem;
+  line-height: 1.58;
+}
+
+/* Runeword watchlist */
+
+.diablo2-theme .d2-runeword-panel {
+  border-color: rgba(246, 196, 83, 0.11);
+}
+
+.diablo2-theme .d2-runeword-list {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0.85rem;
+}
+
+.diablo2-theme .d2-runeword-card {
+  overflow: hidden;
+  border: 1px solid var(--d2-border);
+  border-radius: 0.95rem;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(246, 196, 83, 0.055), transparent 15rem),
+    rgba(255, 255, 255, 0.018);
+}
+
+.diablo2-theme .d2-runeword-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0.9rem 0.75rem;
+  border-bottom: 1px solid var(--d2-border);
+}
+
+.diablo2-theme .d2-runeword-title h3 {
+  margin: 0.2rem 0 0;
+  color: #f7e7bc;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.diablo2-theme .d2-runeword-title svg {
+  color: var(--d2-gold);
+}
+
+.diablo2-theme .d2-runeword-details {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+}
+
+.diablo2-theme .d2-runeword-field {
+  padding: 0.8rem 0.9rem;
+}
+
+.diablo2-theme .d2-runeword-field:nth-child(2) {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.diablo2-theme .d2-runeword-notes {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--d2-border);
+}
+
+.diablo2-theme .d2-runeword-field > .d2-field-label {
+  display: block;
+  margin-bottom: 0.55rem;
+}
+
+.diablo2-theme .d2-rune-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+}
+
+.diablo2-theme .d2-rune-chip {
+  display: inline-flex;
+  min-width: 2.4rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--d2-gold-border);
+  border-radius: 0.5rem;
+  padding: 0.38rem 0.5rem;
+  color: #f6d889;
+  background: rgba(246, 196, 83, 0.065);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.035em;
+}
+
+.diablo2-theme .d2-compact-list {
+  display: grid;
+  gap: 0.38rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.diablo2-theme .d2-compact-list li {
+  position: relative;
+  padding-left: 0.85rem;
+  color: var(--d2-muted);
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.diablo2-theme .d2-compact-list li::before {
+  position: absolute;
+  top: 0.58em;
+  left: 0;
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 999px;
+  content: "";
+  background: rgba(246, 196, 83, 0.6);
+}
+
+@media (max-width: 1180px) {
+  .diablo2-theme .d2-item-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1080px) {
+  .diablo2-theme .d2-reference-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .diablo2-theme .d2-item-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .diablo2-theme .d2-item-grid,
+  .diablo2-theme .d2-runeword-details {
+    grid-template-columns: 1fr;
+  }
+
+  .diablo2-theme .d2-runeword-field:nth-child(2) {
+    border-top: 1px solid var(--d2-border);
+    border-left: 0;
+  }
+
+  .diablo2-theme .d2-runeword-notes {
+    grid-column: auto;
+  }
+}
