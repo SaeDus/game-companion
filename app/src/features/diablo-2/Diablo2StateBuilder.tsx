@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  BookOpen,
   Database,
   LayoutDashboard,
   Menu,
@@ -8,12 +9,13 @@ import {
 
 import Diablo2Directive from "./Diablo2Directive";
 import Diablo2Exporter from "./Diablo2Exporter";
+import Diablo2Watchlist from "./Diablo2Watchlist";
 
 import "./styles/Diablo2.css";
 import "./styles/Diablo2StateBuilder.css";
 import "./styles/Diablo2Exporter.css";
 
-type Diablo2PageId = "directive" | "exporter";
+type Diablo2PageId = "directive" | "watchlist" | "exporter";
 
 type Diablo2NavigationItem = {
   Id: Diablo2PageId;
@@ -24,8 +26,13 @@ type Diablo2NavigationItem = {
 const navigationItems: Diablo2NavigationItem[] = [
   {
     Id: "directive",
-    Label: "Command Hub",
+    Label: "Directive",
     Icon: LayoutDashboard,
+  },
+  {
+    Id: "watchlist",
+    Label: "Watchlist",
+    Icon: BookOpen,
   },
   {
     Id: "exporter",
@@ -40,6 +47,9 @@ function Diablo2StateBuilder() {
 
   function renderActivePage() {
     switch (activePage) {
+      case "watchlist":
+        return <Diablo2Watchlist />;
+
       case "exporter":
         return <Diablo2Exporter />;
 
@@ -52,7 +62,7 @@ function Diablo2StateBuilder() {
   return (
     <div className="diablo2-theme d2-state-shell">
       <aside
-        className={`d2-navigation ${navigationExpanded ? "is-expanded" : ""}`}
+        className={"d2-navigation " + (navigationExpanded ? "is-expanded" : "")}
         aria-label="Diablo II navigation"
       >
         <div className="d2-navigation-header">
@@ -81,7 +91,7 @@ function Diablo2StateBuilder() {
             return (
               <button
                 type="button"
-                className={`d2-navigation-item ${isActive ? "is-active" : ""}`}
+                className={"d2-navigation-item " + (isActive ? "is-active" : "")}
                 key={item.Id}
                 onClick={() => setActivePage(item.Id)}
                 aria-current={isActive ? "page" : undefined}
