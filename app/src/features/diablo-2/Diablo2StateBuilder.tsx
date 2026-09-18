@@ -10,12 +10,14 @@ import {
 import Diablo2Directive from "./Diablo2Directive";
 import Diablo2Exporter from "./Diablo2Exporter";
 import Diablo2Watchlist from "./Diablo2Watchlist";
+import Diablo2Home from "./Diablo2Home";
+import Diablo2Initialization from "./components/Diablo2Initialization";
 
 import "./styles/Diablo2.css";
 import "./styles/Diablo2StateBuilder.css";
 import "./styles/Diablo2Exporter.css";
 
-type Diablo2PageId = "directive" | "watchlist" | "exporter";
+type Diablo2PageId = "home" | "directive" | "watchlist" | "exporter";
 
 type Diablo2NavigationItem = {
   Id: Diablo2PageId;
@@ -24,6 +26,11 @@ type Diablo2NavigationItem = {
 };
 
 const navigationItems: Diablo2NavigationItem[] = [
+  {
+    Id: "home",
+    Label: "Home",
+    Icon: LayoutDashboard,
+  },
   {
     Id: "directive",
     Label: "Directive",
@@ -54,8 +61,11 @@ function Diablo2StateBuilder() {
         return <Diablo2Exporter />;
 
       case "directive":
-      default:
         return <Diablo2Directive />;
+
+      case "home":
+      default:
+        return <Diablo2Home />;
     }
   }
 
