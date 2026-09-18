@@ -7,12 +7,13 @@ import {
   PackageSearch,
   ScrollText,
 } from "lucide-react";
+
 import {
   InstructionSection,
   RunewordSection,
-} from "./types/RuntimeInstructions.ts";
+} from "../types/RuntimeInstructions.ts";
 
-import "./styles/Diablo2Watchlist.css";
+import "./Diablo2Watchlist.css";
 
 function Diablo2Watchlist() {
   const [instructionItemTracking, setInstructionItemTracking] =

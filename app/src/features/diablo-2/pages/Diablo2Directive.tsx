@@ -8,9 +8,9 @@ import {
   Sparkles,
   Target,
 } from "lucide-react";
-import { InstructionSection } from "./types/RuntimeInstructions.ts";
+import { InstructionSection } from "../types/RuntimeInstructions.ts";
 
-import "./styles/Diablo2Directive.css";
+import "./Diablo2Directive.css";
 
 function Diablo2Directive() {
   const [instructionObjective, setInstructionObjective] =

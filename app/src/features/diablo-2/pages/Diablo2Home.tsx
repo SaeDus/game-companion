@@ -1,3 +1,5 @@
+import "./Diablo2Home.css";
+
 function Diablo2Home() {
   return (
     <>

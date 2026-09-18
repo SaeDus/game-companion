@@ -16,8 +16,10 @@ import {
   AlertTriangle,
 } from "lucide-react";
 
-import type { Metadata } from "../Metadata";
-import type { GameData } from "../GameData";
+import type { Metadata } from "../../Metadata";
+import type { GameData } from "../../GameData";
+
+import "./Diablo2Exporter.css";
 
 function Diablo2Exporter() {
   const [characterPath, setCharacterPath] = useState<string | null>(null);

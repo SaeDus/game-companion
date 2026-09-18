@@ -7,15 +7,15 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import Diablo2Directive from "./Diablo2Directive";
-import Diablo2Exporter from "./Diablo2Exporter";
-import Diablo2Watchlist from "./Diablo2Watchlist";
-import Diablo2Home from "./Diablo2Home";
+import Diablo2Directive from "./pages/Diablo2Directive";
+import Diablo2Exporter from "./pages/Diablo2Exporter";
+import Diablo2Watchlist from "./pages/Diablo2Watchlist";
+import Diablo2Home from "./pages/Diablo2Home";
 import Diablo2Initialization from "./components/Diablo2Initialization";
 
-import "./styles/Diablo2.css";
-import "./styles/Diablo2StateBuilder.css";
-import "./styles/Diablo2Exporter.css";
+import "./Diablo2.css";
+import "./Diablo2StateBuilder.css";
+import "./pages/Diablo2Exporter.css";
 
 type Diablo2PageId = "home" | "directive" | "watchlist" | "exporter";
 
@@ -43,7 +43,7 @@ const navigationItems: Diablo2NavigationItem[] = [
   },
   {
     Id: "exporter",
-    Label: "State Exporter",
+    Label: "Exporter",
     Icon: Database,
   },
 ];
