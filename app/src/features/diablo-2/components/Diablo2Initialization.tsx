@@ -39,16 +39,17 @@ function Diablo2Initialization() {
       return;
     }
 
-    const dataPath = await join(
-      await localDataDir(),
-      "game-companion",
-      "games",
-      "diablo-2",
-      "data"
-    );
-
     try {
       setError(null);
+      setStatusMessage("Reading .txt data files...");
+
+      const dataPath = await join(
+        await localDataDir(),
+        "game-companion",
+        "games",
+        "diablo-2",
+        "data"
+      );
 
       const result = await Command.create("d2-exporter", [
         "run",
@@ -60,9 +61,9 @@ function Diablo2Initialization() {
         dataPath,
       ]).execute();
 
-      if (result.stderr.trim()) {
+      if (result.code !== 0) {
         throw new Error(
-          result.stderr ||
+          result.stderr.trim() ||
           `Diablo II exporter failed with code ${result.code}`
         );
       }
@@ -78,7 +79,7 @@ function Diablo2Initialization() {
       try {
         dataState = JSON.parse(result.stdout);
       } catch {
-        console.error("Exporder stdout:", result.stdout);
+        console.error("Exporter stdout:", result.stdout);
         console.error("Exporter stderr:", result.stderr);
 
         throw new Error(
@@ -115,10 +116,7 @@ function Diablo2Initialization() {
       >
         Initialize Diablo II Data
       </button>
-      <p></p>
       <pre>{statusMessage}</pre>
-      <p></p>
-      <pre>{error}</pre>
     </>
   );
 }

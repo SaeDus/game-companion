@@ -168,16 +168,6 @@ function Diablo2Exporter() {
         stashPath,
       ]).execute();
 
-      // const result = await Command.create("d2-exporter", [
-      //   "run",
-      //   "--project",
-      //   "../../exporters/diablo-2/d2-reader.csproj",
-      //   "--",
-      //   "initialize",
-      //   "<path_to_source_files>",
-      //   "<path_to_data_directory>",
-      // ]).execute();
-
       if (result.stderr.trim()) {
         setExporterMessages(result.stderr);
       }
