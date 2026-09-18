@@ -1,129 +1,420 @@
 .diablo2-theme {
   --d2-bg: #070708;
-  --d2-surface: rgba(9, 9, 11, 0.65);
+  --d2-bg-deep: #040405;
+  --d2-surface: rgba(11, 11, 14, 0.86);
+  --d2-surface-raised: rgba(19, 18, 21, 0.92);
+  --d2-surface-soft: rgba(255, 255, 255, 0.028);
+  --d2-border: rgba(255, 255, 255, 0.085);
+  --d2-border-strong: rgba(255, 255, 255, 0.14);
   --d2-text: #f4f4f5;
-  --d2-muted: #a1a1aa;
-  --d2-amber: #fbbf24;
-  --d2-violet: #8b5cf6;
+  --d2-text-soft: #d4d4d8;
+  --d2-muted: #8d8d97;
+  --d2-muted-deep: #5f5f69;
+  --d2-gold: #f6c453;
+  --d2-gold-soft: rgba(246, 196, 83, 0.1);
+  --d2-gold-border: rgba(246, 196, 83, 0.22);
+  --d2-red: #ef746f;
+  --d2-red-soft: rgba(239, 116, 111, 0.09);
+  --d2-red-border: rgba(239, 116, 111, 0.2);
+  --d2-violet: #a78bfa;
+  --d2-violet-soft: rgba(167, 139, 250, 0.09);
+  --d2-violet-border: rgba(167, 139, 250, 0.18);
+  --d2-green: #6ee7b7;
 
   min-height: 100vh;
   color: var(--d2-text);
   background: var(--d2-bg);
 }
 
-/*
-  Diablo II feature background.
+.diablo2-theme,
+.diablo2-theme button,
+.diablo2-theme input,
+.diablo2-theme select,
+.diablo2-theme textarea {
+  color: var(--d2-text);
+}
 
-  The subtle amber and violet radial lights keep the feature from
-  reading as a flat black surface while preserving the darker Diablo
-  presentation established by the exporter.
-*/
-.diablo2-theme .app-shell {
+.diablo2-theme ::selection {
+  color: #fff8e7;
+  background: rgba(246, 196, 83, 0.22);
+}
+
+.diablo2-theme :focus-visible {
+  outline-color: var(--d2-gold);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Shared Diablo II page foundation                                           */
+/* -------------------------------------------------------------------------- */
+
+.diablo2-theme .d2-page {
   position: relative;
   min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
   color: var(--d2-text);
-  background:
-    radial-gradient(
-      circle at 18% -10%,
-      rgba(245, 158, 11, 0.08),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 90% 12%,
-      rgba(124, 58, 237, 0.06),
-      transparent 25%
-    ),
-    var(--d2-bg);
+  background: linear-gradient(180deg, #09090b 0%, var(--d2-bg-deep) 100%);
 }
 
-/*
-  Barely-visible technical grid used by Diablo II utility pages.
-*/
-.diablo2-theme .app-grid {
+.diablo2-theme .d2-page-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.8;
   background-image:
-    linear-gradient(
-      rgba(255, 255, 255, 0.018) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.018) 1px,
-      transparent 1px
-    );
-
-  background-size: 34px 34px;
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      black,
-      rgba(0, 0, 0, 0.55) 55%,
-      transparent
-    );
+    linear-gradient(rgba(255, 255, 255, 0.017) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.017) 1px, transparent 1px),
+    linear-gradient(115deg, transparent 0%, rgba(246, 196, 83, 0.018) 42%, transparent 70%);
+  background-size: 52px 52px, 52px 52px, 100% 100%;
+  mask-image: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.72) 62%, transparent 100%);
 }
 
-/*
-  Diablo II glass surface treatment. This intentionally remains scoped
-  to the feature so other game plugins can define their own card language.
-*/
-.diablo2-theme .glass-panel {
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.025) inset,
-    0 18px 60px rgba(0, 0, 0, 0.18);
+.diablo2-theme .d2-page-shell {
+  position: relative;
+  width: min(1360px, 100%);
+  margin: 0 auto;
+  padding: clamp(1.25rem, 2vw, 1.75rem);
 }
 
-/*
-  Exporter console scrollbar.
-*/
-.diablo2-theme .diagnostic-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: #3f3f46 transparent;
+.diablo2-theme .d2-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--d2-border);
 }
 
-.diablo2-theme .diagnostic-scroll::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+.diablo2-theme .d2-page-heading {
+  max-width: 52rem;
 }
 
-.diablo2-theme .diagnostic-scroll::-webkit-scrollbar-track {
-  background: transparent;
+.diablo2-theme .d2-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--d2-gold);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
-.diablo2-theme .diagnostic-scroll::-webkit-scrollbar-thumb {
-  background: #27272a;
+.diablo2-theme .d2-page-heading h1 {
+  margin: 0.45rem 0 0;
+  color: #fafafa;
+  font-size: clamp(2.35rem, 4.2vw, 3.25rem);
+  font-weight: 650;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.diablo2-theme .d2-page-heading h1 span {
+  color: var(--d2-gold);
+}
+
+.diablo2-theme .d2-page-heading > p {
+  max-width: 47rem;
+  margin: 0.7rem 0 0;
+  color: var(--d2-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.diablo2-theme .d2-page-summary {
+  display: flex;
+  min-width: 14rem;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.55rem;
+}
+
+.diablo2-theme .d2-runtime-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--d2-border);
   border-radius: 999px;
+  padding: 0.36rem 0.65rem;
+  color: var(--d2-muted);
+  background: rgba(8, 8, 10, 0.7);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.diablo2-theme .diagnostic-scroll::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+.diablo2-theme .d2-runtime-status > span {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: var(--d2-muted-deep);
 }
 
-/*
-  Slight sheen when hovering over the exporter's primary action.
-*/
-.diablo2-theme .generate-button {
+.diablo2-theme .d2-runtime-status.is-ready {
+  border-color: rgba(110, 231, 183, 0.18);
+  color: #a7f3d0;
+  background: rgba(16, 185, 129, 0.055);
+}
+
+.diablo2-theme .d2-runtime-status.is-ready > span {
+  background: var(--d2-green);
+  box-shadow: 0 0 0.7rem rgba(110, 231, 183, 0.65);
+}
+
+.diablo2-theme .d2-runtime-status.is-loading > span {
+  background: var(--d2-gold);
+  box-shadow: 0 0 0.6rem rgba(246, 196, 83, 0.45);
+}
+
+.diablo2-theme .d2-runtime-status.is-error {
+  border-color: var(--d2-red-border);
+  color: #fca5a5;
+  background: var(--d2-red-soft);
+}
+
+.diablo2-theme .d2-runtime-status.is-error > span {
+  background: var(--d2-red);
+}
+
+.diablo2-theme .d2-runtime-metrics {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(6.5rem, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--d2-border);
+  border-radius: 0.9rem;
+  background: rgba(10, 10, 12, 0.72);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.16);
+}
+
+.diablo2-theme .d2-runtime-metric {
+  min-width: 6.5rem;
+  padding: 0.62rem 0.75rem;
+  text-align: center;
+}
+
+.diablo2-theme .d2-runtime-metric + .d2-runtime-metric {
+  border-left: 1px solid var(--d2-border);
+}
+
+.diablo2-theme .d2-runtime-metric strong {
+  display: block;
+  color: var(--d2-text);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.diablo2-theme .d2-runtime-metric span {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--d2-muted-deep);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.59rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.diablo2-theme .d2-load-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--d2-red-border);
+  border-radius: 0.9rem;
+  padding: 0.9rem 1rem;
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.14);
+}
+
+.diablo2-theme .d2-load-error svg {
+  flex: 0 0 auto;
+  margin-top: 0.1rem;
+  color: var(--d2-red);
+}
+
+.diablo2-theme .d2-load-error strong,
+.diablo2-theme .d2-load-error span {
+  display: block;
+}
+
+.diablo2-theme .d2-load-error strong {
+  font-size: 0.84rem;
+}
+
+.diablo2-theme .d2-load-error span {
+  margin-top: 0.2rem;
+  color: #fca5a5;
+  font-size: 0.78rem;
+}
+
+/* Shared panel language used by Diablo II feature pages. */
+
+.diablo2-theme .d2-panel {
   position: relative;
   overflow: hidden;
-}
-
-.diablo2-theme .generate-button::after {
-  position: absolute;
-  inset: 0;
-
-  content: "";
-
+  border: 1px solid var(--d2-border);
+  border-radius: 1.25rem;
   background:
-    linear-gradient(
-      110deg,
-      transparent 20%,
-      rgba(255, 255, 255, 0.28) 45%,
-      transparent 70%
-    );
-
-  transform: translateX(-140%);
-  transition: transform 500ms ease;
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 38%),
+    var(--d2-surface);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.035) inset,
+    0 24px 70px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(18px);
 }
 
-.diablo2-theme .generate-button:not(:disabled):hover::after {
-  transform: translateX(140%);
+.diablo2-theme .d2-panel::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+}
+
+.diablo2-theme .d2-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.15rem 0.9rem;
+  border-bottom: 1px solid var(--d2-border);
+}
+
+.diablo2-theme .d2-panel-header h2 {
+  margin: 0.18rem 0 0;
+  color: var(--d2-text);
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.diablo2-theme .d2-panel-kicker,
+.diablo2-theme .d2-card-kicker,
+.diablo2-theme .d2-field-label {
+  color: var(--d2-muted-deep);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.diablo2-theme .d2-panel-icon {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--d2-border);
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.diablo2-theme .d2-panel-icon-gold {
+  border-color: var(--d2-gold-border);
+  color: var(--d2-gold);
+  background: var(--d2-gold-soft);
+}
+
+.diablo2-theme .d2-panel-icon-red {
+  border-color: var(--d2-red-border);
+  color: var(--d2-red);
+  background: var(--d2-red-soft);
+}
+
+.diablo2-theme .d2-panel-icon-violet {
+  border-color: var(--d2-violet-border);
+  color: var(--d2-violet);
+  background: var(--d2-violet-soft);
+}
+
+.diablo2-theme .d2-copy-stack {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.diablo2-theme .d2-copy-stack p {
+  margin: 0;
+  color: var(--d2-muted);
+  font-size: 0.81rem;
+  line-height: 1.58;
+}
+
+.diablo2-theme .d2-empty-message {
+  margin: 0;
+  padding: 1rem 1.45rem 1.25rem;
+  color: var(--d2-muted-deep);
+  font-size: 0.78rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.diablo2-theme .d2-muted-text {
+  color: var(--d2-muted-deep);
+  font-size: 0.74rem;
+  font-style: italic;
+}
+
+@media (max-width: 1180px) {
+  .diablo2-theme .d2-page-shell {
+    padding: 1.25rem;
+  }
+
+  .diablo2-theme .d2-page-header {
+    align-items: flex-start;
+  }
+
+  .diablo2-theme .d2-page-heading h1 {
+    font-size: 2.65rem;
+  }
+
+  .diablo2-theme .d2-page-summary {
+    min-width: 13rem;
+  }
+}
+
+@media (max-width: 940px) {
+  .diablo2-theme .d2-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .diablo2-theme .d2-page-summary {
+    width: 100%;
+    min-width: 0;
+    align-items: flex-start;
+  }
+
+  .diablo2-theme .d2-runtime-metrics {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .diablo2-theme .d2-page-shell {
+    padding: 1.1rem;
+  }
+
+  .diablo2-theme .d2-page-heading h1 {
+    font-size: 2.35rem;
+  }
+
+  .diablo2-theme .d2-runtime-metric {
+    min-width: 0;
+    padding-inline: 0.5rem;
+  }
+
+  .diablo2-theme .d2-panel-header {
+    padding-inline: 1rem;
+  }
 }

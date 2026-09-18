@@ -1,0 +1,208 @@
+/* -------------------------------------------------------------------------- */
+/* Diablo II Directive page                                                   */
+/* -------------------------------------------------------------------------- */
+
+.diablo2-theme .d2-directive-page {
+  background:
+    radial-gradient(circle at 16% -8%, rgba(196, 137, 37, 0.16), transparent 30rem),
+    radial-gradient(circle at 94% 4%, rgba(111, 37, 37, 0.14), transparent 27rem),
+    linear-gradient(180deg, #09090b 0%, var(--d2-bg-deep) 100%);
+}
+
+.diablo2-theme .d2-primary-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(21rem, 0.95fr);
+  align-items: start;
+  gap: 1rem;
+}
+
+/* Objective */
+
+.diablo2-theme .d2-objective-panel {
+  border-color: rgba(246, 196, 83, 0.13);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(246, 196, 83, 0.07), transparent 28rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 38%),
+    var(--d2-surface);
+}
+
+.diablo2-theme .d2-objective-header {
+  border-bottom-color: rgba(246, 196, 83, 0.1);
+}
+
+.diablo2-theme .d2-current-task {
+  padding: 1.2rem 1.35rem 1.3rem;
+}
+
+.diablo2-theme .d2-current-task .d2-field-label {
+  color: rgba(246, 196, 83, 0.72);
+}
+
+.diablo2-theme .d2-task-lines {
+  max-width: 58rem;
+  margin-top: 0.5rem;
+}
+
+.diablo2-theme .d2-task-lines p {
+  margin: 0;
+  color: #fafafa;
+  font-size: clamp(1.2rem, 1.75vw, 1.6rem);
+  font-weight: 560;
+  letter-spacing: -0.035em;
+  line-height: 1.32;
+}
+
+.diablo2-theme .d2-task-lines p + p {
+  margin-top: 0.7rem;
+}
+
+.diablo2-theme .d2-objective-support-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--d2-border);
+}
+
+.diablo2-theme .d2-objective-section {
+  min-height: 0;
+  padding: 1.05rem 1.15rem 1.15rem;
+}
+
+.diablo2-theme .d2-objective-section + .d2-objective-section {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.diablo2-theme .d2-report-section {
+  background: rgba(246, 196, 83, 0.018);
+}
+
+.diablo2-theme .d2-subsection-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.65rem;
+}
+
+.diablo2-theme .d2-subsection-heading svg {
+  color: var(--d2-gold);
+}
+
+.diablo2-theme .d2-subsection-heading h3 {
+  margin: 0;
+  color: var(--d2-text-soft);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.diablo2-theme .d2-instruction-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.diablo2-theme .d2-instruction-list li {
+  position: relative;
+  padding-left: 1.15rem;
+  color: var(--d2-muted);
+  font-size: 0.8rem;
+  line-height: 1.52;
+}
+
+.diablo2-theme .d2-instruction-list li::before {
+  position: absolute;
+  top: 0.62em;
+  left: 0;
+  width: 0.35rem;
+  height: 0.35rem;
+  border: 1px solid rgba(246, 196, 83, 0.6);
+  border-radius: 999px;
+  content: "";
+  background: rgba(246, 196, 83, 0.12);
+}
+
+.diablo2-theme .d2-current-task > .d2-empty-message,
+.diablo2-theme .d2-objective-section > .d2-empty-message {
+  padding: 0.7rem 0 0;
+}
+
+/* Permanent stopping conditions */
+
+.diablo2-theme .d2-stop-panel {
+  border-color: rgba(239, 116, 111, 0.12);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(127, 29, 29, 0.09), transparent 21rem),
+    var(--d2-surface);
+}
+
+.diablo2-theme .d2-stop-list {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.75rem;
+}
+
+.diablo2-theme .d2-stop-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.65rem;
+  border: 1px solid rgba(239, 116, 111, 0.11);
+  border-radius: 0.9rem;
+  padding: 0.75rem;
+  background: rgba(127, 29, 29, 0.045);
+}
+
+.diablo2-theme .d2-stop-index {
+  display: grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  place-items: center;
+  border: 1px solid var(--d2-red-border);
+  border-radius: 0.52rem;
+  color: rgba(252, 165, 165, 0.82);
+  background: rgba(239, 116, 111, 0.06);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+}
+
+.diablo2-theme .d2-stop-card h3 {
+  margin: 0 0 0.25rem;
+  color: #f4e3e3;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.diablo2-theme .d2-stop-card .d2-copy-stack p {
+  color: #96969f;
+  font-size: 0.77rem;
+  line-height: 1.48;
+}
+
+@media (max-width: 1180px) {
+  .diablo2-theme .d2-primary-grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.9fr);
+  }
+}
+
+@media (max-width: 1080px) {
+  .diablo2-theme .d2-primary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .diablo2-theme .d2-objective-support-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .diablo2-theme .d2-objective-section + .d2-objective-section {
+    border-top: 1px solid var(--d2-border);
+    border-left: 0;
+  }
+
+  .diablo2-theme .d2-current-task,
+  .diablo2-theme .d2-objective-section {
+    padding-inline: 1rem;
+  }
+}
