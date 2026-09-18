@@ -76,14 +76,14 @@ function Diablo2Initialization() {
         dataPath,
       ]).execute();
 
-      if (result.code !== 0) {
+      if (!result.stdout.trim()) {
         throw new Error(
           result.stderr.trim() ||
           `Diablo II exporter failed with code ${result.code}`
         );
       }
 
-      let dataState: InitializationResult = JSON.parse(result.stdout);
+      const dataState: InitializationResult = JSON.parse(result.stdout);
       setStatus(dataState);
     } catch (error) {
       console.error(error);
