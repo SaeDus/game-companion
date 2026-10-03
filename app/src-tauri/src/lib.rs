@@ -259,6 +259,44 @@ fn build_game_companion(
     )
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use serde_json::json;
+
+    #[test]
+    fn strip_metadata_removes_id_and_schema_version() {
+        let input = json!({
+            "Id": "test-rules",
+            "SchemaVersion": 1,
+            "Name": "Test Rules"
+        });
+
+        let (id, result) = strip_metadata(input).unwrap();
+
+        assert_eq!(id, "test-rules");
+        assert_eq!(result["Name"], "Test Rules");
+        assert!(result.get("Id").is_none());
+        assert!(result.get("SchemaVersion").is_none());
+    }
+
+    #[test]
+    fn strip_metadata_returns_error_when_id_is_missing() {
+        let input = json!({
+            "SchemaVersion": 1,
+            "Name": "Broken Rules"
+        });
+
+        let result = strip_metadata(input);
+
+        assert!(result.is_err());
+        assert_eq!(
+            result.unwrap_err(),
+            "JSON file is missing Id"
+        );
+    }
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
