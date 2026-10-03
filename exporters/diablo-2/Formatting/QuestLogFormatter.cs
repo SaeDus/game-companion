@@ -3,11 +3,11 @@ using D2SSharp.Model;
 
 public static class QuestLogFormatter
 {
-    public static QuestLogState BuildQuestLogState(D2Save save)
+    public static QuestLogState BuildQuestLogState(QuestSection quests)
     {
-        DifficultyState normal = BuildDifficultyState(save.Quests.Normal);
-        DifficultyState nightmare = BuildDifficultyState(save.Quests.Nightmare);
-        DifficultyState hell = BuildDifficultyState(save.Quests.Hell);
+        DifficultyState normal = BuildDifficultyState(quests.Normal);
+        DifficultyState nightmare = BuildDifficultyState(quests.Nightmare);
+        DifficultyState hell = BuildDifficultyState(quests.Hell);
 
         if (
             normal.DifficultyStatus is "NotStarted"

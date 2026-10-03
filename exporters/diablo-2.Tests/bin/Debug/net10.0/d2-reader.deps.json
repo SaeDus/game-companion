@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "d2-reader/1.0.0": {
+        "dependencies": {
+          "D2SSharp": "0.0.22"
+        },
+        "runtime": {
+          "d2-reader.dll": {}
+        }
+      },
+      "D2SSharp/0.0.22": {
+        "runtime": {
+          "lib/net10.0/D2SSharp.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "d2-reader/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "D2SSharp/0.0.22": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bBr9B63Jc8rakYBgAixQ+dd6qtUYFggrKA3p3yFngfIiY/JkoE0h9SQfX+NuK9TuVTSyDQLxVyALe/vsDTS24w==",
+      "path": "d2ssharp/0.0.22",
+      "hashPath": "d2ssharp.0.0.22.nupkg.sha512"
+    }
+  }
+}

@@ -11,10 +11,10 @@ public static class CharacterFormatter
             Level = save.Character.Level,
             Class = save.Character.Class.ToString(),
 
-            BaseAttributes = BuildAttributeState(save),
+            BaseAttributes = BuildAttributeState(save.Stats),
             UnspentStatPoints = (int)save.Stats.GetStat(StatId.StatPoints),
 
-            BaseSkills = [.. BuildSkillState(save)],
+            BaseSkills = [.. BuildSkillState(save.Skills)],
             UnspentSkillPoints = (int)save.Stats.GetStat(StatId.SkillPoints),
         };
 
@@ -39,15 +39,15 @@ public static class CharacterFormatter
         return characterState;
     }
 
-    public static MercenaryState BuildMercenaryState(D2Save save)
+    public static MercenaryState BuildMercenaryState(MercData mercData, MercItemsSection? mercItems)
     {
-        HirelingMetadata? hireling = HirelingLookup.Get(save.Character.MercData.HirelingId);
+        HirelingMetadata? hireling = HirelingLookup.Get(mercData.HirelingId);
 
         MercenaryState mercenaryState = new()
         {
-            Id = save.Character.MercData.HirelingId,
-            NameIndex = save.Character.MercData.NameIndex,
-            Experience = save.Character.MercData.Experience,
+            Id = mercData.HirelingId,
+            NameIndex = mercData.NameIndex,
+            Experience = mercData.Experience,
         };
 
         if (hireling == null)
@@ -59,7 +59,7 @@ public static class CharacterFormatter
         mercenaryState.SubType = hireling.Identity.SubType;
 
         HirelingResolvedState resolved = GetHirelingLevel(
-            save.Character.MercData.Experience,
+            mercData.Experience,
             hireling.Rows
         );
 
@@ -86,12 +86,12 @@ public static class CharacterFormatter
             mercenaryState.Skills.Add(skill.Name);
         }
 
-        if (save.MercItems == null)
+        if (mercItems == null)
         {
             return mercenaryState;
         }
 
-        foreach (var item in BuildItemStates(save.MercItems.Items))
+        foreach (var item in BuildItemStates(mercItems.Items))
         {
             mercenaryState.Equipment.Add(item);
         }
@@ -178,29 +178,29 @@ public static class CharacterFormatter
         return baseValue + (levelsGained * perLevel / 8);
     }
 
-    private static AttributeState BuildAttributeState(D2Save save)
+    private static AttributeState BuildAttributeState(PlayerStats stats)
     {
         return new AttributeState()
         {
-            Strength = (int)save.Stats.GetStat(StatId.Strength),
-            Dexterity = (int)save.Stats.GetStat(StatId.Dexterity),
-            Vitality = (int)save.Stats.GetStat(StatId.Vitality),
-            Energy = (int)save.Stats.GetStat(StatId.Energy),
+            Strength = (int)stats.GetStat(StatId.Strength),
+            Dexterity = (int)stats.GetStat(StatId.Dexterity),
+            Vitality = (int)stats.GetStat(StatId.Vitality),
+            Energy = (int)stats.GetStat(StatId.Energy),
         };
     }
 
-    private static IEnumerable<SkillState> BuildSkillState(D2Save save)
+    private static IEnumerable<SkillState> BuildSkillState(SkillsSection skills)
     {
         for (int i = 0; i < 30; i++)
         {
-            int points = save.Skills[i];
+            int points = skills[i];
 
             if (points == 0)
             {
                 continue;
             }
 
-            int skillId = save.Skills.GetSkillId(i);
+            int skillId = skills.GetSkillId(i);
 
             yield return new SkillState()
             {

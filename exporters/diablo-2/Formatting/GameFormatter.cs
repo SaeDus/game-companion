@@ -25,9 +25,9 @@ public class GameFormatter
             ),
 
             Character = CharacterFormatter.BuildCharacterState(save),
-            Mercenary = CharacterFormatter.BuildMercenaryState(save),
+            Mercenary = CharacterFormatter.BuildMercenaryState(save.Character.MercData, save.MercItems),
             Stash = CharacterFormatter.BuildStashState(stash),
-            QuestLog = QuestLogFormatter.BuildQuestLogState(save),
+            QuestLog = QuestLogFormatter.BuildQuestLogState(save.Quests),
 
             ControlledResources = new()
             {
